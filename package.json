@@ -15,5 +15,15 @@
   "bugs": {
     "url": "https://github.com/danielideriba/dekretoApp/issues"
   },
-  "homepage": "https://github.com/danielideriba/dekretoApp#readme"
+  "homepage": "https://github.com/danielideriba/dekretoApp#readme",
+  "devDependecies": {
+    "nodemon": "^1.11.0"
+  },
+  "dependecies": {
+    "express": "^4.14.0"
+  },
+  "dependencies": {
+    "mongodb": "^2.2.30",
+    "mongoose": "^4.11.5"
+  }
 }
