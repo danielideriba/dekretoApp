@@ -1,0 +1,19 @@
+{
+  "name": "dekreto",
+  "version": "1.0.0",
+  "description": "Dekreto APIRest for Dekreto App",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danielideriba/dekretoApp.git"
+  },
+  "author": "Daniel Ideriba",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/danielideriba/dekretoApp/issues"
+  },
+  "homepage": "https://github.com/danielideriba/dekretoApp#readme"
+}
