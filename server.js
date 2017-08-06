@@ -11,11 +11,22 @@ var express = require('express'),
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(bodyParser.json());
 
-
   var routes = require('./api/routes/dekretoRoutes');
   routes(app);
 
 app.listen(port);
+
+//Regras
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/site/index.html')
+});
+app.get('/admin', (req, res) => {
+  res.sendFile(__dirname + '/admin/index.html')
+});
+
+app.post('/quotes', (req, res) => {
+  console.log('Hellooooooooooooooooo!')
+});
 
 app.use(function(req, res) {
   res.status(404).send({url: req.originalUrl + ' not found'})
