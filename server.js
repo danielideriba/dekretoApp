@@ -1,35 +1,103 @@
-var express = require('express'),
-  app = express(),
-  port = process.env.PORT || 80,
-  mongoose = require('mongoose'),
-    Task = require('./api/models/dekretoModel'),
-    bodyParser = require('body-parser');
+const express = require('express');
+const path = require('path');
+const mongoose = require('mongoose');
+var port = 3000;
+var bodyParser = require('body-parser');
+var adminPath = '/admin';
 
-  mongoose.Promise = global.Promise;
-  mongoose.connect('mongodb://localhost/dekretodb', { useMongoClient: true });
+//init
+const app = express();
 
-  app.use(bodyParser.urlencoded({ extended: true }));
-  app.use(bodyParser.json());
+//models
+let Users = require('./admin/models/users');
 
-  var routes = require('./api/routes/dekretoRoutes');
-  routes(app);
+//connect with mongodb
+mongoose.Promise = global.Promise;
+mongoose.connect('mongodb://localhost/dekretodb', { useMongoClient: true });
+let db = mongoose.connection;
 
-app.listen(port);
-
-//Regras
-app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/site/index.html')
-});
-app.get('/admin', (req, res) => {
-  res.sendFile(__dirname + '/admin/index.html')
+//Check connection
+db.once('openUri', function(){
+  console.log('Connected on mongodb');
 });
 
-app.post('/quotes', (req, res) => {
-  console.log('Hellooooooooooooooooo!')
+//DB errors
+db.on('error', function(err){
+  console.log(err);
 });
 
-app.use(function(req, res) {
-  res.status(404).send({url: req.originalUrl + ' not found'})
+
+//Load view engine
+app.set('views', path.join(__dirname, '/admin/views'));
+app.set('view engine', 'pug');
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+//set public folder
+app.use(express.static(path.join(__dirname, "public")));
+
+//add routes
+app.get(adminPath, function(req, res){
+  res.render('index', {
+    title: "SISTEMA ADMINSTRATIVO DEKRETOAPP",
+    description: "Sistema que alimenta a RESTApi"
+  });
 });
 
-console.log('Server DekretoApi iniciado na porta: ' + port);
+app.get(adminPath+'/users/add', function(req, res) {
+  res.render('add_users', {
+    title: "Cadastro de Usuários",
+    user_name: "Nome do usuário",
+    nick_name: "Nick Name",
+    password: "Senha"
+  })
+});
+
+// add submit POST routes
+app.post(adminPath+'/users/add', function(req, res){
+  let users = new Users();
+  users.user_name = req.body.user_name;
+  users.nick_name = req.body.nick_name;
+  users.password = req.body.password;
+
+  users.save(function(err){
+    if(err){
+      console.log(err);
+      return;
+    } else {
+      console.log("Salvou e vai redirecionar");
+      res.redirect(adminPath+'/users/add');
+    }
+  });
+});
+
+//List all users
+app.get(adminPath+'/users/list', function(req, res){
+  Users.find({}, function(err, users){
+    if(err){
+      console.log(err);
+    } else {
+      res.render('list_users', {
+        title: "lista de usuários",
+        users: users
+      });
+    }
+  });
+});
+
+//Single users
+app.get(adminPath+'/users/:id', function(req, res){
+  Users.findById(req.params.id, function(err, user){
+    if(err){
+      console.log(err);
+    } else {
+      res.render('single_user', {
+        name: user
+      });
+    }
+  });
+});
+
+app.listen(port, function(){
+    console.log('Server DekretoApi iniciado na porta: ' + port);
+});

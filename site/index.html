@@ -1,620 +1,158 @@
 <!DOCTYPE html>
-<!-- saved from url=(0046)http://felipeoshima.com.br/app/novo/index.html -->
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html>
+<head>
 	<title>Dekreto</title>
 
 	<!--Let browser know website is optimized for mobile-->
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+	<meta charset="utf-8">
 
 	<!--Import Google Icon Font-->
-	<link href="icon" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 	<!-- Compiled and minified CSS -->
-	<link rel="stylesheet" href="site/materialize.min.css">
-	<link rel="stylesheet" href="global.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/css/materialize.min.css">
+	<link rel="stylesheet" href="css/global.css">
 
-	<script async="" src="analytics.js"></script><script id="facebook-jssdk" src="sdk.js"></script><script type="text/javascript" src=" jquery-3.2.1.min.js"></script>
-	<!-- Compiled and minified JavaScript -->
-	<script src="materialize.min.js"></script>
+	<!-- LIBS JavaScript -->
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/js/materialize.min.js"></script>
 
+</head>
+<body>
+	<div id="app">
 
-	<script type="text/javascript">
-		$(document).ready(function() {
-			$(".nav-usuario").sideNav();
+		<header>
 
-			// SideNav de filtro
-			$('.nav-filtro').sideNav({
-				edge: 'right'
-			});
-
-			$('ul.tab-principal').tabs({
-				//swipeable: true
-			});
-
-			//document.querySelector('.tabs-content.carousel').style.height = window.innerHeight + "px";
-
-
-			$(".btn-abre-busca").click(function() {
-				$(".header-busca").show()
-				$(".header-busca input").focus()
-				$(".header-principal").hide()
-			})
-			$(".btn-fecha-busca").click(function() {
-				$(".header-busca").hide()
-				$(".header-principal").show()
-			})
-			$(".header-busca input").focusout(function() {
-				$(".header-busca").hide()
-				$(".header-principal").show()
-			})
-
-		})
-	</script>
-
-	<style type="text/css">
-
-	</style>
-<style type="text/css">.fb_hidden{position:absolute;top:-10000px;z-index:10001}.fb_reposition{overflow:hidden;position:relative}.fb_invisible{display:none}.fb_reset{background:none;border:0;border-spacing:0;color:#000;cursor:auto;direction:ltr;font-family:"lucida grande", tahoma, verdana, arial, sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}.fb_reset>div{overflow:hidden}.fb_link img{border:none}@keyframes fb_transform{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}.fb_animate{animation:fb_transform .3s forwards}
-.fb_dialog{background:rgba(82, 82, 82, .7);position:absolute;top:-10000px;z-index:10001}.fb_reset .fb_dialog_legacy{overflow:visible}.fb_dialog_advanced{padding:10px;-moz-border-radius:8px;-webkit-border-radius:8px;border-radius:8px}.fb_dialog_content{background:#fff;color:#333}.fb_dialog_close_icon{background:url(http://static.xx.fbcdn.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px}.fb_dialog_mobile .fb_dialog_close_icon{top:5px;left:5px;right:auto}.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}.fb_dialog_close_icon:hover{background:url(http://static.xx.fbcdn.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent}.fb_dialog_close_icon:active{background:url(http://static.xx.fbcdn.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent}.fb_dialog_loader{background-color:#f6f7f9;border:1px solid #606060;font-size:24px;padding:20px}.fb_dialog_top_left,.fb_dialog_top_right,.fb_dialog_bottom_left,.fb_dialog_bottom_right{height:10px;width:10px;overflow:hidden;position:absolute}.fb_dialog_top_left{background:url(http://static.xx.fbcdn.net/rsrc.php/v3/ye/r/8YeTNIlTZjm.png) no-repeat 0 0;left:-10px;top:-10px}.fb_dialog_top_right{background:url(http://static.xx.fbcdn.net/rsrc.php/v3/ye/r/8YeTNIlTZjm.png) no-repeat 0 -10px;right:-10px;top:-10px}.fb_dialog_bottom_left{background:url(http://static.xx.fbcdn.net/rsrc.php/v3/ye/r/8YeTNIlTZjm.png) no-repeat 0 -20px;bottom:-10px;left:-10px}.fb_dialog_bottom_right{background:url(http://static.xx.fbcdn.net/rsrc.php/v3/ye/r/8YeTNIlTZjm.png) no-repeat 0 -30px;right:-10px;bottom:-10px}.fb_dialog_vert_left,.fb_dialog_vert_right,.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{position:absolute;background:#525252;filter:alpha(opacity=70);opacity:.7}.fb_dialog_vert_left,.fb_dialog_vert_right{width:10px;height:100%}.fb_dialog_vert_left{margin-left:-10px}.fb_dialog_vert_right{right:0;margin-right:-10px}.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{width:100%;height:10px}.fb_dialog_horiz_top{margin-top:-10px}.fb_dialog_horiz_bottom{bottom:0;margin-bottom:-10px}.fb_dialog_iframe{line-height:0}.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #365899;color:#fff;font-size:14px;font-weight:bold;margin:0}.fb_dialog_content .dialog_title>span{background:url(http://static.xx.fbcdn.net/rsrc.php/v3/yd/r/Cou7n-nqK52.gif) no-repeat 5px 50%;float:left;padding:5px 0 7px 26px}body.fb_hidden{-webkit-transform:none;height:100%;margin:0;overflow:visible;position:absolute;top:-10000px;left:0;width:100%}.fb_dialog.fb_dialog_mobile.loading{background:url(http://static.xx.fbcdn.net/rsrc.php/v3/ya/r/3rhSv5V8j3o.gif) white no-repeat 50% 50%;min-height:100%;min-width:100%;overflow:hidden;position:absolute;top:0;z-index:10001}.fb_dialog.fb_dialog_mobile.loading.centered{width:auto;height:auto;min-height:initial;min-width:initial;background:none}.fb_dialog.fb_dialog_mobile.loading.centered #fb_dialog_loader_spinner{width:100%}.fb_dialog.fb_dialog_mobile.loading.centered .fb_dialog_content{background:none}.loading.centered #fb_dialog_loader_close{color:#fff;display:block;padding-top:20px;clear:both;font-size:18px}#fb-root #fb_dialog_ipad_overlay{background:rgba(0, 0, 0, .45);position:absolute;bottom:0;left:0;right:0;top:0;width:100%;min-height:100%;z-index:10000}#fb-root #fb_dialog_ipad_overlay.hidden{display:none}.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}.fb_dialog_content .dialog_header{-webkit-box-shadow:white 0 1px 1px -1px inset;background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#738ABA), to(#2C4987));border-bottom:1px solid;border-color:#1d4088;color:#fff;font:14px Helvetica, sans-serif;font-weight:bold;text-overflow:ellipsis;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0;vertical-align:middle;white-space:nowrap}.fb_dialog_content .dialog_header table{-webkit-font-smoothing:subpixel-antialiased;height:43px;width:100%}.fb_dialog_content .dialog_header td.header_left{font-size:12px;padding-left:5px;vertical-align:middle;width:60px}.fb_dialog_content .dialog_header td.header_right{font-size:12px;padding-right:5px;vertical-align:middle;width:60px}.fb_dialog_content .touchable_button{background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#4966A6), color-stop(.5, #355492), to(#2A4887));border:1px solid #29487d;-webkit-background-clip:padding-box;-webkit-border-radius:3px;-webkit-box-shadow:rgba(0, 0, 0, .117188) 0 1px 1px inset, rgba(255, 255, 255, .167969) 0 1px 0;display:inline-block;margin-top:3px;max-width:85px;line-height:18px;padding:4px 12px;position:relative}.fb_dialog_content .dialog_header .touchable_button input{border:none;background:none;color:#fff;font:12px Helvetica, sans-serif;font-weight:bold;margin:2px -12px;padding:2px 6px 3px 6px;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog_content .dialog_header .header_center{color:#fff;font-size:16px;font-weight:bold;line-height:18px;text-align:center;vertical-align:middle}.fb_dialog_content .dialog_content{background:url(http://static.xx.fbcdn.net/rsrc.php/v3/y9/r/jKEcVPZFk-2.gif) no-repeat 50% 50%;border:1px solid #555;border-bottom:0;border-top:0;height:150px}.fb_dialog_content .dialog_footer{background:#f6f7f9;border:1px solid #555;border-top-color:#ccc;height:40px}#fb_dialog_loader_close{float:left}.fb_dialog.fb_dialog_mobile .fb_dialog_close_button{text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}#fb_dialog_loader_spinner{animation:rotateSpinner 1.2s linear infinite;background-color:transparent;background-image:url(http://static.xx.fbcdn.net/rsrc.php/v3/yD/r/t-wz8gw1xG1.png);background-repeat:no-repeat;background-position:50% 50%;height:24px;width:24px}@keyframes rotateSpinner{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
-.fb_iframe_widget{display:inline-block;position:relative}.fb_iframe_widget span{display:inline-block;position:relative;text-align:justify}.fb_iframe_widget iframe{position:absolute}.fb_iframe_widget_fluid_desktop,.fb_iframe_widget_fluid_desktop span,.fb_iframe_widget_fluid_desktop iframe{max-width:100%}.fb_iframe_widget_fluid_desktop iframe{min-width:220px;position:relative}.fb_iframe_widget_lift{z-index:1}.fb_hide_iframes iframe{position:relative;left:-10000px}.fb_iframe_widget_loader{position:relative;display:inline-block}.fb_iframe_widget_fluid{display:inline}.fb_iframe_widget_fluid span{width:100%}.fb_iframe_widget_loader iframe{min-height:32px;z-index:2;zoom:1}.fb_iframe_widget_loader .FB_Loader{background:url(http://static.xx.fbcdn.net/rsrc.php/v3/y9/r/jKEcVPZFk-2.gif) no-repeat;height:32px;width:32px;margin-left:-16px;position:absolute;left:50%;z-index:4}</style></head>
-<body cz-shortcut-listen="true">
-
-	<header>
-
-		<!-- BUSCA -->
-		<nav class="header-busca">
-			<div class="nav-wrapper light-blue darken-3">
-				<form>
-					<div class="input-field">
-						<input id="search" type="search" required="">
-						<label class="label-icon" for="search"><i class="material-icons">search</i></label>
-						<i class="material-icons btn-fecha-busca">close</i>
-					</div>
-				</form>
-			</div>
-		</nav>
-
-		<!-- HEADER Principal -->
-		<nav class="nav-extended light-blue darken-3">
-			<div class="nav-wrapper header-principal">
-				<div class="left">
-					<a href="http://felipeoshima.com.br/app/novo/index.html#" data-activates="nav-usuario" class="button-collapse nav-usuario"><i class="material-icons">menu</i></a>
-					<a href="http://felipeoshima.com.br/app/novo/index.html#!" class="brand-logo"><i class="material-icons">flash_on</i>Dekreto</a>
+			<!-- BUSCA -->
+			<nav class="header-busca">
+				<div class="nav-wrapper light-blue darken-3">
+					<form>
+						<div class="input-field">
+							<input id="search" type="search" required>
+							<label class="label-icon" for="search"><i class="material-icons">search</i></label>
+							<i class="material-icons btn-fecha-busca">close</i>
+						</div>
+					</form>
 				</div>
-				<ul class="right">
-					<li><a href="javascript:void(0);" class="btn-abre-busca"><i class="material-icons">search</i></a></li>
-					<li><a href="http://felipeoshima.com.br/app/novo/index.html#" data-activates="nav-filtro" class="nav-filtro"><i class="material-icons">filter_list</i></a></li>
+			</nav>
+
+			<!-- HEADER Principal -->
+			<nav class="nav-extended light-blue darken-3">
+				<div class="nav-wrapper header-principal">
+					<div class="left">
+						<a href="#" data-activates="nav-usuario" class="button-collapse nav-usuario"><i class="material-icons">menu</i></a>
+						<a href="#!" class="brand-logo"><i class="material-icons">flash_on</i>Dekreto</a>
+					</div>
+					<ul class="right">
+						<li><a href="javascript:void(0);" class="btn-abre-busca"><i class="material-icons">search</i></a></li>
+						<li><a href="#" data-activates="nav-filtro" class="nav-filtro"><i class="material-icons">filter_list</i></a></li>
+					</ul>
+				</div>
+
+
+				<!-- BTN TABS Principais -->
+				<div class="nav-content">
+					<div>
+						<ul class="tabs tabs-transparent tab-principal">
+							<li class="tab col s3"><a href="#tab-seg">SEG<span>31</span></a></li>
+							<li class="tab col s3"><a href="#tab-ter">TER<span>01</span></a></li>
+							<li class="tab col s3"><a href="#tab-qua">QUA<span>02</span></a></li>
+							<li class="tab col s3"><a href="#tab-qui">QUI<span>03</span></a></li>
+							<li class="tab col s3"><a href="#tab-sex">SEX<span>04</span></a></li>
+							<li class="tab col s3"><a href="#tab-sab">SAB<span>05</span></a></li>
+							<li class="tab col s3"><a href="#tab-dom">DOM<span>06</span></a></li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+
+			<!-- SideNav Usuário -->
+			<ul id="nav-usuario" class="side-nav">
+				<li>
+					<div class="user-view">
+						<div class="background">
+							<img src="imagens/office.jpg">
+						</div>
+						<a href="#!user" id="foto_usuario"></a>
+						<a href="#!name"><span class="white-text name" id="nome_usuario"></span></a>
+						<fb:login-button scope="public_profile,email" onlogin="checkLoginState();" data-auto-logout-link="true"> </fb:login-button>
+					</div>
+				</li>
+				<ul>
+					<li><a href="javascript:void(0);">Meus dados</a></li>
+					<li><a href="javascript:voi(0);" class="btn">Deixe seu Feedback</a></li>
 				</ul>
-			</div>
-
-
-			<!-- BTN TABS Principais -->
-			<div class="nav-content">
-				<div>
-					<ul class="tabs tabs-transparent tab-principal">
-						<li class="tab col s3"><a href="http://felipeoshima.com.br/app/novo/index.html#tab-seg" class="active">SEG<span>31</span></a></li>
-						<li class="tab col s3"><a href="http://felipeoshima.com.br/app/novo/index.html#tab-ter">TER<span>01</span></a></li>
-						<li class="tab col s3"><a href="http://felipeoshima.com.br/app/novo/index.html#tab-qua">QUA<span>02</span></a></li>
-						<li class="tab col s3"><a href="http://felipeoshima.com.br/app/novo/index.html#tab-qui">QUI<span>03</span></a></li>
-						<li class="tab col s3"><a href="http://felipeoshima.com.br/app/novo/index.html#tab-sex">SEX<span>04</span></a></li>
-						<li class="tab col s3"><a href="http://felipeoshima.com.br/app/novo/index.html#tab-sab">SAB<span>05</span></a></li>
-						<li class="tab col s3"><a href="http://felipeoshima.com.br/app/novo/index.html#tab-dom">DOM<span>06</span></a></li>
-					<li class="indicator" style="right: 1362px; left: 0px;"></li></ul>
-				</div>
-			</div>
-		</nav>
-
-		<!-- SideNav Usuário -->
-		<ul id="nav-usuario" class="side-nav" style="transform: translateX(-100%);">
-			<li>
-				<div class="user-view">
-					<div class="background">
-						<img src=" office.jpg">
-					</div>
-					<a href="http://felipeoshima.com.br/app/novo/index.html#!user" id="foto_usuario"></a>
-					<a href="http://felipeoshima.com.br/app/novo/index.html#!name"><span class="white-text name" id="nome_usuario"></span></a>
-					<fb:login-button scope="public_profile,email" onlogin="checkLoginState();" data-auto-logout-link="true" login_text="" class=" fb_iframe_widget" fb-xfbml-state="rendered" fb-iframe-plugin-query="app_id=318328151911682&amp;auto_logout_link=true&amp;container_width=0&amp;locale=pt_BR&amp;scope=public_profile%2Cemail&amp;sdk=joey"><span style="vertical-align: bottom; width: 64px; height: 22px;"><iframe name="f20dcc7044928ec" width="1000px" height="1000px" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" title="fb:login_button Facebook Social Plugin" src=" login_button.html" style="border: none; visibility: visible; width: 64px; height: 22px;" class=""></iframe></span></fb:login-button>
-				</div>
-			</li>
-			<ul>
-				<li><a href="javascript:void(0);">Meus dados</a></li>
-				<li><a href="javascript:voi(0);" class="btn">Deixe seu Feedback</a></li>
 			</ul>
-		</ul>
 
-		<!-- SideNav Filtro -->
-		<ul id="nav-filtro" class="side-nav right-aligned" style="transform: translateX(100%);">
+			<!-- SideNav Filtro -->
+			<ul id="nav-filtro" class="side-nav">
 
-			<li class="titulo"><a class="subheader">Filtros</a></li>
+				<li class="titulo"><a class="subheader">Filtros</a></li>
 
-			<li><a class="subheader">Tipo de festa</a></li>
-			<li class="item-filtro">
-				<input type="checkbox" class="filled-in" id="check-openbar">
-				<label for="check-openbar">Open Bar</label>
-			</li>
-			<li class="item-filtro">
-				<input type="checkbox" class="filled-in" id="check-vip">
-				<label for="check-vip">VIP</label>
-			</li>
-			<li class="item-filtro">
-				<input type="checkbox" class="filled-in" id="check-consumacao">
-				<label for="check-consumacao">Consumação</label>
-			</li>
+				<li><a class="subheader">Tipo de festa</a></li>
+				<li class="item-filtro">
+					<input type="checkbox" class="filled-in" id="check-openbar" />
+					<label for="check-openbar">Open Bar</label>
+				</li>
+				<li class="item-filtro">
+					<input type="checkbox" class="filled-in" id="check-vip" />
+					<label for="check-vip">VIP</label>
+				</li>
+				<li class="item-filtro">
+					<input type="checkbox" class="filled-in" id="check-consumacao" />
+					<label for="check-consumacao">Consumação</label>
+				</li>
 
-			<li><div class="divider"></div></li>
-			<li><a class="subheader">Locais mais badalados</a></li>
-			<li class="item-filtro">
-				<input type="checkbox" class="filled-in" id="check-augusta">
-				<label for="check-augusta">Augusta e região</label>
-			</li>
-			<li class="item-filtro">
-				<input type="checkbox" class="filled-in" id="check-vmadalena">
-				<label for="check-vmadalena">Vila Madalena</label>
-			</li>
-			<li class="item-filtro">
-				<input type="checkbox" class="filled-in" id="check-volimpia">
-				<label for="check-volimpia">Vila Olímpia</label>
-			</li>
-			<li class="item-filtro">
-				<input type="checkbox" class="filled-in" id="check-pinheiros">
-				<label for="check-pinheiros">Pinheiros</label>
-			</li>
-
-
-			<li><div class="divider"></div></li>
-			<li><a class="subheader">Estilos</a></li>
-			<li class="item-filtro">
-				<input type="checkbox" class="filled-in" id="check-pop">
-				<label for="check-pop">Pop</label>
-			</li>
-			<li class="item-filtro">
-				<input type="checkbox" class="filled-in" id="check-rock">
-				<label for="check-rock">Rock</label>
-			</li>
-			<li class="item-filtro">
-				<input type="checkbox" class="filled-in" id="check-indie">
-				<label for="check-indie">indie</label>
-			</li>
-			<li class="item-filtro">
-				<input type="checkbox" class="filled-in" id="check-sertanejo">
-				<label for="check-sertanejo">Sertanejo</label>
-			</li>
-			<li class="item-filtro">
-				<input type="checkbox" class="filled-in" id="check-funk">
-				<label for="check-funk">Funk</label>
-			</li>
-			<li class="item-filtro">
-				<input type="checkbox" class="filled-in" id="check-samba">
-				<label for="check-samba">Samba</label>
-			</li>
-			<li class="item-filtro">
-				<input type="checkbox" class="filled-in" id="check-brasilidade">
-				<label for="check-brasilidade">Brasilidade</label>
-			</li>
+				<li><div class="divider"></div></li>
+				<li><a class="subheader">Locais mais badalados</a></li>
+				<li class="item-filtro">
+					<input type="checkbox" class="filled-in" id="check-augusta" />
+					<label for="check-augusta">Augusta e região</label>
+				</li>
+				<li class="item-filtro">
+					<input type="checkbox" class="filled-in" id="check-vmadalena" />
+					<label for="check-vmadalena">Vila Madalena</label>
+				</li>
+				<li class="item-filtro">
+					<input type="checkbox" class="filled-in" id="check-volimpia" />
+					<label for="check-volimpia">Vila Olímpia</label>
+				</li>
+				<li class="item-filtro">
+					<input type="checkbox" class="filled-in" id="check-pinheiros" />
+					<label for="check-pinheiros">Pinheiros</label>
+				</li>
 
 
-		</ul>
-	</header>
+				<li><div class="divider"></div></li>
+				<li><a class="subheader">Estilos</a></li>
+				<div id="estilos">
 
-	<!-- CONTEUDO TABS Principais -->
-	<div class="row lista-cards">
-		<!-- TAB GERAL -->
-		<div id="tab-seg" class="col s12 active">
-			<div class="col s12 m7">
-				<a href="http://felipeoshima.com.br/app/novo/detalhe.html?lab-club">
-					<div class="card horizontal card-lista">
-						<div class="card-stacked">
-							<div class="card-content">
-								<div class="card-image left">
-									<img src=" logo-lab.png">
-								</div>
-								<h2>Lab Club</h2>
-								<h3>Gringo Party - All vip - Double beer &amp; vodka</h3>
-							</div>
-							<div class="card-content">
-								<p><span>O que toca?</span> Indie/Rock</p>
-								<p><span>Com lista:</span> VIP até 0h - Após R$15 entrada ou R$30 consumação</p>
-								<p><span>Sem lista:</span> R$20 entrada ou R$40 consumação</p>
-							</div>
-							<div class="card-action">
-								<div class="icone">
-									<i class="material-icons icone-consumacao left">check</i>
-									<span>CONSUMAÇÃO</span>
-								</div>
-							</div>
-						</div>
-					</div>
-				</a>
-				<a href="http://felipeoshima.com.br/app/novo/detalhe.html?cine-joia">
-					<div class="card horizontal card-lista">
-						<div class="card-stacked">
-							<div class="card-content">
-								<div class="card-image left">
-									<img src=" logo-glow.png">
-								</div>
-								<h2>Cine Jóia</h2>
-								<h3>Glow in the Dark</h3>
-							</div>
-							<div class="card-content">
-								<p><span>O que toca?</span> Indie/Rock</p>
-								<p><span>Com lista:</span> VIP até 0h - Após R$15 entrada ou R$30 consumação</p>
-								<p><span>Sem lista:</span> R$20 entrada ou R$40 consumação</p>
-							</div>
-							<div class="card-action">
-								<div class="icone">
-									<i class="material-icons icone-vip left">star</i>
-									<span>VIP</span>
-								</div>
-							</div>
-						</div>
-					</div>
-				</a>
-				<a href="http://felipeoshima.com.br/app/novo/detalhe.html?beco203">
-					<div class="card horizontal card-lista">
-						<div class="card-stacked">
-							<div class="card-content">
-								<div class="card-image left">
-									<img src=" logo-beco.png">
-								</div>
-								<h2>Beco 203</h2>
-								<h3>Fuck Rehab</h3>
-							</div>
-							<div class="card-content">
-								<p><span>O que toca?</span> Indie/Rock</p>
-								<p><span>Com lista:</span> VIP até 0h - Após R$15 entrada ou R$30 consumação</p>
-								<p><span>Sem lista:</span> R$20 entrada ou R$40 consumação</p>
-							</div>
-							<div class="card-action">
-								<div class="icone">
-									<i class="material-icons icone-vip left">star</i>
-									<span>VIP</span>
-								</div>
-								<div class="icone">
-									<i class="material-icons icone-openbar left">local_bar</i>
-									<span>OPEN BAR</span>
-								</div>
-							</div>
-						</div>
-					</div>
-				</a>
-			</div>
-		</div>
-		<!-- TAB OPEN BAR -->
-		<div id="tab-ter" class="col s12" style="display: none;">
-			<a href="http://felipeoshima.com.br/app/novo/detalhe.html?beco203">
-				<div class="card horizontal card-lista">
-					<div class="card-stacked">
-						<div class="card-content">
-							<div class="card-image left">
-								<img src=" logo-beco.png">
-							</div>
-							<h2>Beco 203</h2>
-							<h3>Fuck Rehab</h3>
-						</div>
-						<div class="card-content">
-							<p><span>O que toca?</span> Indie/Rock</p>
-							<p><span>Com lista:</span> VIP até 0h - Após R$15 entrada ou R$30 consumação</p>
-							<p><span>Sem lista:</span> R$20 entrada ou R$40 consumação</p>
-						</div>
-						<div class="card-action">
-							<div class="icone">
-								<i class="material-icons icone-vip left">star</i>
-								<span>VIP</span>
-							</div>
-							<div class="icone">
-								<i class="material-icons icone-openbar left">local_bar</i>
-								<span>OPEN BAR</span>
-							</div>
-						</div>
-					</div>
 				</div>
-			</a>
-		</div>
-		<div id="tab-qua" class="col s12" style="display: none;">
 
-			<a href="http://felipeoshima.com.br/app/novo/detalhe.html?cine-joia">
-				<div class="card horizontal card-lista">
-					<div class="card-stacked">
-						<div class="card-content">
-							<div class="card-image left">
-								<img src=" logo-glow.png">
-							</div>
-							<h2>Cine Jóia</h2>
-							<h3>Glow in the Dark</h3>
-						</div>
-						<div class="card-content">
-							<p><span>O que toca?</span> Indie/Rock</p>
-							<p><span>Com lista:</span> VIP até 0h - Após R$15 entrada ou R$30 consumação</p>
-							<p><span>Sem lista:</span> R$20 entrada ou R$40 consumação</p>
-						</div>
-						<div class="card-action">
-							<div class="icone">
-								<i class="material-icons icone-vip left">star</i>
-								<span>VIP</span>
-							</div>
-						</div>
-					</div>
-				</div>
-			</a>
-			<a href="http://felipeoshima.com.br/app/novo/detalhe.html?beco203">
-				<div class="card horizontal card-lista">
-					<div class="card-stacked">
-						<div class="card-content">
-							<div class="card-image left">
-								<img src=" logo-beco.png">
-							</div>
-							<h2>Beco 203</h2>
-							<h3>Fuck Rehab</h3>
-						</div>
-						<div class="card-content">
-							<p><span>O que toca?</span> Indie/Rock</p>
-							<p><span>Com lista:</span> VIP até 0h - Após R$15 entrada ou R$30 consumação</p>
-							<p><span>Sem lista:</span> R$20 entrada ou R$40 consumação</p>
-						</div>
-						<div class="card-action">
-							<div class="icone">
-								<i class="material-icons icone-vip left">star</i>
-								<span>VIP</span>
-							</div>
-							<div class="icone">
-								<i class="material-icons icone-openbar left">local_bar</i>
-								<span>OPEN BAR</span>
-							</div>
-						</div>
-					</div>
-				</div>
-			</a>
-		</div>
-		<div id="tab-qui" class="col s12" style="display: none;">
-			<div class="col s12 m7">
-				<a href="http://felipeoshima.com.br/app/novo/detalhe.html?lab-club">
-					<div class="card horizontal card-lista">
-						<div class="card-stacked">
-							<div class="card-content">
-								<div class="card-image left">
-									<img src=" logo-lab.png">
-								</div>
-								<h2>Lab Club</h2>
-								<h3>Gringo Party - All vip - Double beer &amp; vodka</h3>
-							</div>
-							<div class="card-content">
-								<p><span>O que toca?</span> Indie/Rock</p>
-								<p><span>Com lista:</span> VIP até 0h - Após R$15 entrada ou R$30 consumação</p>
-								<p><span>Sem lista:</span> R$20 entrada ou R$40 consumação</p>
-							</div>
-							<div class="card-action">
-								<div class="icone">
-									<i class="material-icons icone-consumacao left">check</i>
-									<span>CONSUMAÇÃO</span>
-								</div>
-							</div>
-						</div>
-					</div>
-				</a>
-				<a href="http://felipeoshima.com.br/app/novo/detalhe.html?cine-joia">
-					<div class="card horizontal card-lista">
-						<div class="card-stacked">
-							<div class="card-content">
-								<div class="card-image left">
-									<img src=" logo-glow.png">
-								</div>
-								<h2>Cine Jóia</h2>
-								<h3>Glow in the Dark</h3>
-							</div>
-							<div class="card-content">
-								<p><span>O que toca?</span> Indie/Rock</p>
-								<p><span>Com lista:</span> VIP até 0h - Após R$15 entrada ou R$30 consumação</p>
-								<p><span>Sem lista:</span> R$20 entrada ou R$40 consumação</p>
-							</div>
-							<div class="card-action">
-								<div class="icone">
-									<i class="material-icons icone-vip left">star</i>
-									<span>VIP</span>
-								</div>
-							</div>
-						</div>
-					</div>
-				</a>
-				<a href="http://felipeoshima.com.br/app/novo/detalhe.html?beco203">
-					<div class="card horizontal card-lista">
-						<div class="card-stacked">
-							<div class="card-content">
-								<div class="card-image left">
-									<img src=" logo-beco.png">
-								</div>
-								<h2>Beco 203</h2>
-								<h3>Fuck Rehab</h3>
-							</div>
-							<div class="card-content">
-								<p><span>O que toca?</span> Indie/Rock</p>
-								<p><span>Com lista:</span> VIP até 0h - Após R$15 entrada ou R$30 consumação</p>
-								<p><span>Sem lista:</span> R$20 entrada ou R$40 consumação</p>
-							</div>
-							<div class="card-action">
-								<div class="icone">
-									<i class="material-icons icone-vip left">star</i>
-									<span>VIP</span>
-								</div>
-								<div class="icone">
-									<i class="material-icons icone-openbar left">local_bar</i>
-									<span>OPEN BAR</span>
-								</div>
-							</div>
-						</div>
-					</div>
-				</a>
-			</div>
-		</div>
-		<!-- TAB OPEN BAR -->
-		<div id="tab-sex" class="col s12" style="display: none;">
-			<a href="http://felipeoshima.com.br/app/novo/detalhe.html?beco203">
-				<div class="card horizontal card-lista">
-					<div class="card-stacked">
-						<div class="card-content">
-							<div class="card-image left">
-								<img src=" logo-beco.png">
-							</div>
-							<h2>Beco 203</h2>
-							<h3>Fuck Rehab</h3>
-						</div>
-						<div class="card-content">
-							<p><span>O que toca?</span> Indie/Rock</p>
-							<p><span>Com lista:</span> VIP até 0h - Após R$15 entrada ou R$30 consumação</p>
-							<p><span>Sem lista:</span> R$20 entrada ou R$40 consumação</p>
-						</div>
-						<div class="card-action">
-							<div class="icone">
-								<i class="material-icons icone-vip left">star</i>
-								<span>VIP</span>
-							</div>
-							<div class="icone">
-								<i class="material-icons icone-openbar left">local_bar</i>
-								<span>OPEN BAR</span>
-							</div>
-						</div>
-					</div>
-				</div>
-			</a>
-		</div>
-		<div id="tab-sab" class="col s12" style="display: none;">
+			</ul>
+		</header>
 
-			<a href="http://felipeoshima.com.br/app/novo/detalhe.html?cine-joia">
-				<div class="card horizontal card-lista">
-					<div class="card-stacked">
-						<div class="card-content">
-							<div class="card-image left">
-								<img src="logo-glow.png">
-							</div>
-							<h2>Cine Jóia</h2>
-							<h3>Glow in the Dark</h3>
-						</div>
-						<div class="card-content">
-							<p><span>O que toca?</span> Indie/Rock</p>
-							<p><span>Com lista:</span> VIP até 0h - Após R$15 entrada ou R$30 consumação</p>
-							<p><span>Sem lista:</span> R$20 entrada ou R$40 consumação</p>
-						</div>
-						<div class="card-action">
-							<div class="icone">
-								<i class="material-icons icone-vip left">star</i>
-								<span>VIP</span>
-							</div>
-						</div>
-					</div>
-				</div>
-			</a>
-			<a href="http://felipeoshima.com.br/app/novo/detalhe.html?beco203">
-				<div class="card horizontal card-lista">
-					<div class="card-stacked">
-						<div class="card-content">
-							<div class="card-image left">
-								<img src=" logo-beco.png">
-							</div>
-							<h2>Beco 203</h2>
-							<h3>Fuck Rehab</h3>
-						</div>
-						<div class="card-content">
-							<p><span>O que toca?</span> Indie/Rock</p>
-							<p><span>Com lista:</span> VIP até 0h - Após R$15 entrada ou R$30 consumação</p>
-							<p><span>Sem lista:</span> R$20 entrada ou R$40 consumação</p>
-						</div>
-						<div class="card-action">
-							<div class="icone">
-								<i class="material-icons icone-vip left">star</i>
-								<span>VIP</span>
-							</div>
-							<div class="icone">
-								<i class="material-icons icone-openbar left">local_bar</i>
-								<span>OPEN BAR</span>
-							</div>
-						</div>
-					</div>
-				</div>
-			</a>
-		</div>
-		<div id="tab-dom" class="col s12" style="display: none;">
-			<div class="col s12 m7">
-				<a href="http://felipeoshima.com.br/app/novo/detalhe.html?lab-club">
-					<div class="card horizontal card-lista">
-						<div class="card-stacked">
-							<div class="card-content">
-								<div class="card-image left">
-									<img src=" logo-lab.png">
-								</div>
-								<h2>Lab Club</h2>
-								<h3>Gringo Party - All vip - Double beer &amp; vodka</h3>
-							</div>
-							<div class="card-content">
-								<p><span>O que toca?</span> Indie/Rock</p>
-								<p><span>Com lista:</span> VIP até 0h - Após R$15 entrada ou R$30 consumação</p>
-								<p><span>Sem lista:</span> R$20 entrada ou R$40 consumação</p>
-							</div>
-							<div class="card-action">
-								<div class="icone">
-									<i class="material-icons icone-consumacao left">check</i>
-									<span>CONSUMAÇÃO</span>
-								</div>
-							</div>
-						</div>
-					</div>
-				</a>
-				<a href="http://felipeoshima.com.br/app/novo/detalhe.html?cine-joia">
-					<div class="card horizontal card-lista">
-						<div class="card-stacked">
-							<div class="card-content">
-								<div class="card-image left">
-									<img src="logo-glow.png">
-								</div>
-								<h2>Cine Jóia</h2>
-								<h3>Glow in the Dark</h3>
-							</div>
-							<div class="card-content">
-								<p><span>O que toca?</span> Indie/Rock</p>
-								<p><span>Com lista:</span> VIP até 0h - Após R$15 entrada ou R$30 consumação</p>
-								<p><span>Sem lista:</span> R$20 entrada ou R$40 consumação</p>
-							</div>
-							<div class="card-action">
-								<div class="icone">
-									<i class="material-icons icone-vip left">star</i>
-									<span>VIP</span>
-								</div>
-							</div>
-						</div>
-					</div>
-				</a>
-				<a href="http://felipeoshima.com.br/app/novo/detalhe.html?beco203">
-					<div class="card horizontal card-lista">
-						<div class="card-stacked">
-							<div class="card-content">
-								<div class="card-image left">
-									<img src=" logo-beco.png">
-								</div>
-								<h2>Beco 203</h2>
-								<h3>Fuck Rehab</h3>
-							</div>
-							<div class="card-content">
-								<p><span>O que toca?</span> Indie/Rock</p>
-								<p><span>Com lista:</span> VIP até 0h - Após R$15 entrada ou R$30 consumação</p>
-								<p><span>Sem lista:</span> R$20 entrada ou R$40 consumação</p>
-							</div>
-							<div class="card-action">
-								<div class="icone">
-									<i class="material-icons icone-vip left">star</i>
-									<span>VIP</span>
-								</div>
-								<div class="icone">
-									<i class="material-icons icone-openbar left">local_bar</i>
-									<span>OPEN BAR</span>
-								</div>
-							</div>
-						</div>
-					</div>
-				</a>
-			</div>
-		</div>
-	</div>
+		<!-- CONTEUDO TABS Principais -->
+		<div class="row lista-cards">
+			<div id="tab-seg" class="col s12 tab-conteudo"></div>
+			<div id="tab-ter" class="col s12 tab-conteudo"></div>
+			<div id="tab-qua" class="col s12 tab-conteudo"></div>
+			<div id="tab-qui" class="col s12 tab-conteudo"></div>
+			<div id="tab-sex" class="col s12 tab-conteudo"></div>
+			<div id="tab-sab" class="col s12 tab-conteudo"></div>
+			<div id="tab-dom" class="col s12 tab-conteudo"></div>
 
-<div id="status">Please log into this app.</div>
-	<script>
+			
+		</div>
+		<div id="status"> </div>
+		<div id="loading"></div>
+
+		<!-- JavaScript e json do app -->
+		<script src="js/lista.json"></script>
+		<script src="js/global.js"></script>
+		<script>
 
 
    // This is called with the results from from FB.getLoginStatus().
@@ -647,12 +185,12 @@
   window.fbAsyncInit = function() {
   	FB.init({
   		appId      : '318328151911682',
-				cookie     : true,
-				xfbml      : true,
-				version    : 'v2.8'
-});
+  		cookie     : true,
+  		xfbml      : true,
+  		version    : 'v2.8'
+  	});
 
-  // Now that we've initialized the JavaScript SDK, we call
+  // Now that we've initialized the JavaScript SDK, we call 
   // FB.getLoginStatus().  This function gets the state of the
   // person visiting this page and can return one of three states to
   // the callback you provide.  They can be:
@@ -694,16 +232,16 @@
   		);
   }
 
-</script>
+</script>	
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-104129373-1', 'auto');
-  ga('send', 'pageview');
+	ga('create', 'UA-104129373-1', 'auto');
+	ga('send', 'pageview');
 
 </script>
-
-<div class="hiddendiv common"></div><div class="drag-target" data-sidenav="nav-usuario" style="left: 0px; touch-action: pan-y; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></div><div class="drag-target" data-sidenav="nav-filtro" style="right: 0px; touch-action: pan-y; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></div><div id="fb-root" class=" fb_reset"><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div><iframe name="fb_xdm_frame_http" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" id="fb_xdm_frame_http" aria-hidden="true" title="Facebook Cross Domain Communication Frame" tabindex="-1" src=" XBwzv5Yrm_1.html" style="border: none;"></iframe><iframe name="fb_xdm_frame_https" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" id="fb_xdm_frame_https" aria-hidden="true" title="Facebook Cross Domain Communication Frame" tabindex="-1" src=" XBwzv5Yrm_1(1).html" style="border: none;"></iframe></div></div><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div></div></div></div></body></html>
+</body>
+</html>

@@ -4,6 +4,7 @@
   "description": "Dekreto APIRest for Dekreto App",
   "main": "index.js",
   "scripts": {
+    "dev": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -23,6 +24,7 @@
     "express": "^4.14.0"
   },
   "dependencies": {
+    "method-override": "^2.3.9",
     "mongodb": "^2.2.30",
     "mongoose": "^4.11.5",
     "pug": "^2.0.0-rc.3"
