@@ -1,16 +1,25 @@
 const express = require('express');
+const flash = require('connect-flash');
 const router = express.Router();
+const bcrypt = require('bcryptjs');
+const passport = require('passport');
+const adminPath = '/admin';
+const adminPathUsers = adminPath+'/users';
+const common = require('../utils/common');
+
 
 //models
 let Users = require('../models/users');
 
 //add new User
-router.get('/add', function(req, res) {
+router.get('/add', common.ensureAuthenticated, function(req, res) {
   res.render('add_users', {
     title: "Cadastro de Usuários",
-    user_name: "Nome do usuário",
-    nick_name: "Nick Name",
-    password: "Senha"
+    label_user_name: "Nome do usuário",
+    label_email: "E-Mail",
+    label_email_confirm: "Confirmar E-Mail",
+    label_password: "Senha",
+    label_password2: "Confirmar senha"
   });
 });
 
@@ -18,8 +27,10 @@ router.get('/add', function(req, res) {
 router.post('/add', function(req, res){
   //Validation
   req.checkBody('user_name','Nome do usuário é obrigatório').notEmpty();
-  req.checkBody('nick_name','Nick Name é obrigatório').notEmpty();
+  req.checkBody('email','E-Mail é obrigatório').notEmpty();
+  req.checkBody('email','E-Mail é não válido ').isEmail();
   req.checkBody('password','Senha é obrigatório').notEmpty();
+  req.checkBody('password2','Senha não confere').equals(req.body.password);
 
   //Get errors
   let errors = req.validationErrors();
@@ -27,25 +38,37 @@ router.post('/add', function(req, res){
   if(errors){
     res.render('add_users', {
       title: "Cadastro de Usuários",
-      user_name: "Nome do usuário",
-      nick_name: "Nick Name",
-      password: "Senha",
+      label_user_name: "Nome do usuário",
+      label_email: "E-Mail",
+      label_email_confirm: "Confirmar E-Mail",
+      label_password: "Senha",
+      label_password2: "Confirmar senha",
       errors: errors
     });
   } else {
     let users = new Users();
     users.user_name = req.body.user_name;
-    users.nick_name = req.body.nick_name;
+    users.email = req.body.email;
     users.password = req.body.password;
 
-    users.save(function(err){
-      if(err){
-        console.log(err);
-        return;
-      } else {
-        req.flash('success', 'Usuário Inserido');
-        res.redirect('/list');
-      }
+    bcrypt.genSalt(10, function(err, salt){
+      bcrypt.hash(users.password, salt, function(err, hash){
+        if(err){
+          console.log(err);
+        }
+        users.password = hash;
+
+        users.save(function(err){
+          if(err){
+            console.log(err);
+            return;
+          } else {
+            req.flash('success', 'Usuário Inserido');
+            console.log('Usuário Inserido');
+            res.redirect(adminPathUsers+'/list');
+          }
+        });
+      });
     });
   }
 });
@@ -54,7 +77,7 @@ router.post('/add', function(req, res){
 router.post('/edit/:id', function(req, res){
   let users = {};
   users.user_name = req.body.user_name;
-  users.nick_name = req.body.nick_name;
+  users.email = req.body.email;
   users.password = req.body.password;
 
   let query = {_id:req.params.id}
@@ -64,8 +87,9 @@ router.post('/edit/:id', function(req, res){
       console.log(err);
       return;
     } else {
-      res.flash('success', 'Usuário atualizado');
-      res.redirect('/list');
+      req.flash('success', 'Usuário atualizado');
+      console.log('Usuário atualizado');
+      res.redirect(adminPathUsers+'/list');
     }
   });
 });
@@ -79,7 +103,8 @@ router.get('/edit/:id', function(req, res){
       res.render('edit_user', {
         title: "Editar Usuário",
         label_user_name: "Nome do usuário",
-        label_nick_name: "Nick Name",
+        label_email: "E-Mail",
+        label_email_confirm: "Confirmar E-Mail",
         label_password: "Senha",
         name: user
       });
@@ -88,7 +113,7 @@ router.get('/edit/:id', function(req, res){
 });
 
 //List all users
-router.get('/list', function(req, res){
+router.get('/list', common.ensureAuthenticated, function(req, res){
   Users.find({}, function(err, users){
     if(err){
       console.log(err);
@@ -113,8 +138,30 @@ router.delete('/:id', function(req, res){
   });
 });
 
+router.get('/login', function(req, res){
+  res.render('login', {
+    title: "Login"
+  });
+});
+
+//login process
+router.post('/login', function(req, res, next){
+  passport.authenticate('local', {
+    successRedirect: adminPath,
+    failureRedirect: adminPath+'/users/login',
+    failureFlash: true
+  })(req, res, next);
+});
+
+//Logout process
+router.get("/logout", function(req, res){
+  req.logout();
+  req.flash("success", "Usuário deslogado");
+  res.redirect(adminPath+"/users/login");
+});
+
 //Single user
-router.get('/:id', function(req, res){
+router.get('/:id', common.ensureAuthenticated, function(req, res){
   Users.findById(req.params.id, function(err, user){
     if(err){
       console.log(err);
@@ -125,6 +172,5 @@ router.get('/:id', function(req, res){
     }
   });
 });
-
 
 module.exports = router;

@@ -1,5 +1,6 @@
+'use strict';
 const mongoose = require('mongoose');
-const UsersSchema = mongoose.Schema({
+const PartiesSchema = mongoose.Schema({
   user_name: {
     type: String,
     require: true
@@ -14,4 +15,4 @@ const UsersSchema = mongoose.Schema({
   }
 });
 
-let User = module.exports = mongoose.model('User', UsersSchema);
+let Parties = module.exports = mongoose.model('Parties', PartiesSchema);

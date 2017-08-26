@@ -1,37 +1,48 @@
 doctype html
 html
   head
-    meta(charset='utf-8')
+    meta(charset=charset)
     title #{title}
     link(rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap.css')
     link(rel='stylesheet' href='/css/style.css')  
   body
     nav.navbar.navbar-inverse
+      .container
+        .navbar-header
+          button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#navbar', aria-expanded='false', aria-controls='navbar')
+            span.sr-only Toggle navigation
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a.navbar-brand(href='#') DekretoApp
+        #navbar.collapse.navbar-collapse
+          ul.nav.navbar-nav
+            li.active
+              a(href='/admin') Home
+            if user
+              li
+                a(href='/admin/parties/add') Cadastros de baladas
+              li
+                a(href='/admin/users/add') Cadastro de usuários
+          ul.nav.navbar-nav.navbar-right
+            if user
+              li 
+                a(href="/admin/users/logout") Logout
+              li
+                a(href="/admin/users/") Usuário
+            else
+              li
+                a(href="/admin/users/login") Login
     .container
-      .navbar-header
-        button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#navbar', aria-expanded='false', aria-controls='navbar')
-          span.sr-only Toggle navigation
-          span.icon-bar
-          span.icon-bar
-          span.icon-bar
-        a.navbar-brand(href='#') DekretoApp
-      #navbar.collapse.navbar-collapse
-        ul.nav.navbar-nav
-          li.active
-            a(href='/admin') Home
-          li
-            a(href='/admin/users/add') Cadastro
-      // /.nav-collapse
-  .container
-    != messages('message', locals)
-    if errors
-      each error, i in errors
-        div(class="alert alert-danger") #{error.msg}
-    block content
-    br
-    hr
-    footer
-      p Copyright &copy; 2017
-      script(src='/bower_components/jquery/dist/jquery.js')
-      script(src='/bower_components/bootstrap/dist/js/bootstrap.js')
-      script(src='/js/main.js')
+      != messages('message', locals)
+      if errors
+        each error, i in errors
+          div(class="alert alert-danger") #{error.msg}
+      block content
+      br
+      hr
+      footer
+        p Copyright &copy; 2017
+        script(src='/bower_components/jquery/dist/jquery.js')
+        script(src='/bower_components/bootstrap/dist/js/bootstrap.js')
+        script(src='/js/main.js')

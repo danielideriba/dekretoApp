@@ -1,20 +1,22 @@
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
-var port = 3000;
+const port = 3000;
+const adminPath = '/admin';
 const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
 const flash = require('connect-flash');
 const session = require('express-session');
-
-const adminPath = '/admin';
+const passport = require('passport');
+const config = require(__dirname+'/admin/config/database');
+const common = require(__dirname+'/admin/utils/common');
 
 //init
 const app = express();
 
 //connect with mongodb
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/dekretodb', { useMongoClient: true });
+mongoose.connect(config.database, { useMongoClient: true });
 let db = mongoose.connection;
 
 //Check connection
@@ -69,16 +71,37 @@ app.use(expressValidator({
   }
 }));
 
-app.get(adminPath, function(req, res){
+//passport config
+require(__dirname+'/admin/config/passport')(passport);
+//passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
+//models
+let Users = require(__dirname+'/admin/models/users');
+
+app.get('*', function(req, res, next){
+  res.locals.user = req.user || null;
+  next();
+});
+
+//Home admin
+app.get(adminPath, common.ensureAuthenticated, function(req, res){
   res.render('index', {
-    title: "SISTEMA ADMINSTRATIVO DEKRETOAPP",
-    description: "Sistema que alimenta a RESTApi"
+    title: "SISTEMA ADMINSTRATIVO DEKRETO",
+    description: "Sistema que alimenta a RESTApi",
+    charset: 'utf-8',
+    userId: "adminstrador"
   });
 });
 
-//Route files
+//Routes
 let users = require(__dirname+adminPath+'/routes/users');
 app.use(adminPath+'/users/', users);
+
+let registerParties = require(__dirname+adminPath+'/routes/parties');
+app.use(adminPath+'/parties/', registerParties);
+
 
 app.listen(port, function(){
     console.log('Server DekretoApi iniciado na porta: ' + port);

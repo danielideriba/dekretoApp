@@ -7,11 +7,17 @@ block content
       label #{label_user_name}:
       input.form-control(type='text', name='user_name', value=name.user_name)
       #form-group
-      label #{label_nick_name}:
-      input.form-control(type='text', name='nick_name', value=name.nick_name)
+      label #{label_email}:
+      input.form-control(type='text', name='email', value=name.email)
+      #form-group
+      label #{label_email_confirm}:
+      input.form-control(type='text', name='email_confirm', value=name.email_confirm)
       #form-group
       label #{label_password}:
-      input.form-control(type='text', name='password', value=name.password)
+      input.form-control(type='password', name='password', value=name.password)
+      #form-group
+      label #{label_password2}:
+      input.form-control(type='password', name='password2', value=name.password2)
       #form-group
       br
       button.btn.btn-primary(type='submit',value='Submit') Enviar
