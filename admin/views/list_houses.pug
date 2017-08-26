@@ -1,0 +1,8 @@
+extends layout
+
+block content
+  h1 #{title}
+  ul.list-group
+  each house, i in houses
+    li.list-group-item
+      a(href="/admin/users/"+house._id)=house.name

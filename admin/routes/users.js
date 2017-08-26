@@ -12,7 +12,7 @@ const common = require('../utils/common');
 let Users = require('../models/users');
 
 //add new User
-router.get('/add', common.ensureAuthenticated, function(req, res) {
+router.get('/add', function(req, res) {
   res.render('add_users', {
     title: "Cadastro de Usuários",
     label_user_name: "Nome do usuário",
@@ -113,7 +113,7 @@ router.get('/edit/:id', function(req, res){
 });
 
 //List all users
-router.get('/list', common.ensureAuthenticated, function(req, res){
+router.get('/list', function(req, res){
   Users.find({}, function(err, users){
     if(err){
       console.log(err);
@@ -161,7 +161,7 @@ router.get("/logout", function(req, res){
 });
 
 //Single user
-router.get('/:id', common.ensureAuthenticated, function(req, res){
+router.get('/:id', function(req, res){
   Users.findById(req.params.id, function(err, user){
     if(err){
       console.log(err);

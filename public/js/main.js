@@ -15,3 +15,9 @@ $(document).ready(function(){
     });
   });
 });
+
+jQuery(function($){
+  //Mask input fields
+  //$("#date").mask("99/99/9999",{placeholder:"mm/dd/yyyy"});
+  $("#phone-validate").mask("(99)9999-9999");
+});

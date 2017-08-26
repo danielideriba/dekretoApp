@@ -80,13 +80,14 @@ app.use(passport.session());
 //models
 let Users = require(__dirname+'/admin/models/users');
 
-app.get('*', function(req, res, next){
+//User validation
+/*app.get('*', function(req, res, next){
   res.locals.user = req.user || null;
   next();
-});
+});*/
 
 //Home admin
-app.get(adminPath, common.ensureAuthenticated, function(req, res){
+app.get(adminPath, function(req, res){
   res.render('index', {
     title: "SISTEMA ADMINSTRATIVO DEKRETO",
     description: "Sistema que alimenta a RESTApi",
@@ -96,8 +97,11 @@ app.get(adminPath, common.ensureAuthenticated, function(req, res){
 });
 
 //Routes
-let users = require(__dirname+adminPath+'/routes/users');
-app.use(adminPath+'/users/', users);
+let registerUsers = require(__dirname+adminPath+'/routes/users');
+app.use(adminPath+'/users/', registerUsers);
+
+let registerHouses = require(__dirname+adminPath+'/routes/houses');
+app.use(adminPath+'/houses/', registerHouses);
 
 let registerParties = require(__dirname+adminPath+'/routes/parties');
 app.use(adminPath+'/parties/', registerParties);

@@ -19,11 +19,13 @@ html
           ul.nav.navbar-nav
             li.active
               a(href='/admin') Home
-            if user
-              li
-                a(href='/admin/parties/add') Cadastros de baladas
-              li
-                a(href='/admin/users/add') Cadastro de usuários
+            //if user
+            li
+              a(href='/admin/houses/add') Cadastros de casas
+            li
+              a(href='/admin/parties/add') Cadastros de festas
+            li
+              a(href='/admin/users/add') Cadastro de usuários
           ul.nav.navbar-nav.navbar-right
             if user
               li 
@@ -45,4 +47,5 @@ html
         p Copyright &copy; 2017
         script(src='/bower_components/jquery/dist/jquery.js')
         script(src='/bower_components/bootstrap/dist/js/bootstrap.js')
+        script(src='/js/jquery.maskedinput.js')
         script(src='/js/main.js')

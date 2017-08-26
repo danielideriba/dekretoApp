@@ -11,7 +11,8 @@ const UsersSchema = mongoose.Schema({
   password: {
     type: String,
     require: true
-  }
+  },
+  datetime: { type : Date, default: Date.now }
 });
 
 let User = module.exports = mongoose.model('User', UsersSchema);
