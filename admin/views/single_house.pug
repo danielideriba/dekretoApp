@@ -1,0 +1,22 @@
+extends layout
+
+block content
+  h1= house.name
+  label= house.address
+  br
+  label= house.email
+  br
+  label= house.phone
+  br
+  label= house.site
+  br
+  label= house.description
+  br
+  label= house.cover
+  br
+  label= house.coordinateslat
+  br
+  label= house.coordinateslng
+  hr
+  a.btn.btn-default(href='/admin/houses/edit/'+house._id) Editar
+  a.btn.btn-danger.delete-user(href='#', data-id=house._id) Deletar

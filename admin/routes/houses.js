@@ -24,7 +24,6 @@ router.get('/list', function(req, res){
   });
 });
 
-
 //add new User
 router.get('/add', function(req, res) {
   res.render('add_houses', {
@@ -96,5 +95,87 @@ router.post('/add', function(req, res){
     });
   }
 });
+
+// Update Submit Edit User
+router.post('/edit/:id', function(req, res){
+  let houses = {};
+  houses.name = req.body.house_name;
+  houses.address = req.body.house_address;
+  houses.email = req.body.house_email;
+  houses.phone = req.body.house_phone;
+  houses.site = req.body.house_site;
+  houses.description = req.body.house_description;
+  houses.cover = req.body.house_cover;
+  houses.coordinateslat = req.body.house_coordinateslat;
+  houses.coordinateslng = req.body.house_coordinateslng;
+
+  let query = {_id:req.params.id}
+
+  Houses.update(query, houses, {upsert:true}, function(err){
+    if(err){
+      console.log(err);
+      return;
+    } else {
+      req.flash('success', 'Casa atualizada');
+      console.log('Casa atualizada');
+      res.redirect(adminPathHouses+'/list');
+    }
+  });
+});
+
+//Edit User
+router.get('/edit/:id', function(req, res){
+  Houses.findById(req.params.id, function(err, house){
+    if(err){
+      console.log(err);
+    } else {
+      res.render('edit_houses', {
+        title: "Editar Casas",
+        label_house_name: "Nome do casa",
+        label_house_address: "Endereço",
+        label_house_email: "E-Mail",
+        label_house_phone: "Telefone",
+        label_house_site: "Site",
+        label_house_description: "Descrição",
+        label_house_cover: "Capa",
+        label_house_coordinateslat: "Latitude",
+        label_house_coordinateslng: "Longitude",
+        house: house
+      });
+    }
+  });
+});
+
+//Deletar
+router.delete('/:id', function(req, res){
+  let query = {_id:req.params.id}
+
+  Houses.remove(query, function(err){
+    if(err){
+      console.log(err);
+    }
+    res.send('success');
+  });
+});
+
+router.get('/login', function(req, res){
+  res.render('login', {
+    title: "Login"
+  });
+});
+
+//Single user
+router.get('/:id', function(req, res){
+  Houses.findById(req.params.id, function(err, house){
+    if(err){
+      console.log(err);
+    } else {
+      res.render('single_house', {
+        house: house
+      });
+    }
+  });
+});
+
 
 module.exports = router;

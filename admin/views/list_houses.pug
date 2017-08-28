@@ -5,4 +5,6 @@ block content
   ul.list-group
   each house, i in houses
     li.list-group-item
-      a(href="/admin/users/"+house._id)=house.name
+      a(href="/admin/houses/"+house._id)=house.name
+  hr
+  a.btn.btn-default(href='/admin/houses/add') Adicionar
