@@ -12,7 +12,7 @@ const common = require('../utils/common');
 let Users = require('../models/users');
 
 //add new User
-router.get('/add', function(req, res) {
+router.get('/add', common.ensureAuthenticated, function(req, res) {
   res.render('add_users', {
     title: "Cadastro de Usuários",
     label_user_name: "Nome do usuário",
@@ -82,20 +82,20 @@ router.post('/edit/:id', function(req, res){
 
   let query = {_id:req.params.id}
 
-  Users.update(query, users, function(err){
+  Users.findOneAndUpdate(query, users,{upsert:true}, function(err){
     if(err){
-      console.log(err);
-      return;
+      return res.send(500, { error: err });
     } else {
       req.flash('success', 'Usuário atualizado');
       console.log('Usuário atualizado');
       res.redirect(adminPathUsers+'/list');
     }
   });
+
 });
 
 //Edit User
-router.get('/edit/:id', function(req, res){
+router.get('/edit/:id', common.ensureAuthenticated, function(req, res){
   Users.findById(req.params.id, function(err, user){
     if(err){
       console.log(err);
@@ -106,6 +106,7 @@ router.get('/edit/:id', function(req, res){
         label_email: "E-Mail",
         label_email_confirm: "Confirmar E-Mail",
         label_password: "Senha",
+        label_password2: "Confirmar Senha",
         name: user
       });
     }
@@ -113,7 +114,7 @@ router.get('/edit/:id', function(req, res){
 });
 
 //List all users
-router.get('/list', function(req, res){
+router.get('/list', common.ensureAuthenticated, function(req, res){
   Users.find({}, function(err, users){
     if(err){
       console.log(err);
@@ -161,7 +162,7 @@ router.get("/logout", function(req, res){
 });
 
 //Single user
-router.get('/:id', function(req, res){
+router.get('/:id', common.ensureAuthenticated, function(req, res){
   Users.findById(req.params.id, function(err, user){
     if(err){
       console.log(err);

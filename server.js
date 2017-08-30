@@ -81,13 +81,13 @@ app.use(passport.session());
 let Users = require(__dirname+'/admin/models/users');
 
 //User validation
-/*app.get('*', function(req, res, next){
+app.get('*', function(req, res, next){
   res.locals.user = req.user || null;
   next();
-});*/
+});
 
 //Home admin
-app.get(adminPath, function(req, res){
+app.get(adminPath, common.ensureAuthenticated, function(req, res){
   res.render('index', {
     title: "SISTEMA ADMINSTRATIVO DEKRETO",
     description: "Sistema que alimenta a RESTApi",

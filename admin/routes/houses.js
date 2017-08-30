@@ -11,7 +11,7 @@ const common = require('../utils/common');
 let Houses = require('../models/houses');
 
 //List all users
-router.get('/list', function(req, res){
+router.get('/list', common.ensureAuthenticated, function(req, res){
   Houses.find({}, function(err, houses){
     if(err){
       console.log(err);
@@ -25,7 +25,7 @@ router.get('/list', function(req, res){
 });
 
 //add new User
-router.get('/add', function(req, res) {
+router.get('/add', common.ensureAuthenticated, function(req, res) {
   res.render('add_houses', {
     title: "Cadastro de Casas",
     label_house_name: "Nome do casa",
