@@ -3,6 +3,7 @@ const path = require('path');
 const mongoose = require('mongoose');
 const port = 3000;
 const adminPath = '/admin';
+const apiPath = '/api';
 const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
 const flash = require('connect-flash');
@@ -13,6 +14,7 @@ const common = require(__dirname+'/admin/utils/common');
 
 //init
 const app = express();
+const router = express.Router();
 
 //connect with mongodb
 mongoose.Promise = global.Promise;
@@ -32,6 +34,7 @@ db.on('error', function(err){
 
 //Load view engine
 app.set('views', path.join(__dirname, '/admin/views'));
+app.set('api', path.join(__dirname, '/api'));
 app.set('view engine', 'pug');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -96,7 +99,13 @@ app.get(adminPath, common.ensureAuthenticated, function(req, res){
   });
 });
 
-//Routes
+//Access to api
+router.get('/', function(req, res){
+  res.json({ message: 'Bem vindo a API dekretoApp' });
+});
+app.use('/api', router);
+
+//Routes admin
 let registerUsers = require(__dirname+adminPath+'/routes/users');
 app.use(adminPath+'/users/', registerUsers);
 
@@ -106,6 +115,12 @@ app.use(adminPath+'/houses/', registerHouses);
 let registerParties = require(__dirname+adminPath+'/routes/parties');
 app.use(adminPath+'/parties/', registerParties);
 
+//Routes api
+let registerUsersApi = require(__dirname+apiPath+'/routes/users');
+app.use(apiPath+'/users/', registerUsersApi);
+
+let registerHousesApi = require(__dirname+apiPath+'/routes/houses');
+app.use(apiPath+'/houses/', registerHousesApi);
 
 app.listen(port, function(){
     console.log('Server DekretoApi iniciado na porta: ' + port);
