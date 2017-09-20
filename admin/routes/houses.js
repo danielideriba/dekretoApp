@@ -3,21 +3,21 @@ const flash = require('connect-flash');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
-const adminPath = '/admin';
-const adminPathHouses = adminPath+'/houses';
+const adminPathHouses = '/admin/houses';
 const common = require('../utils/common');
 
 //models
 let Houses = require('../models/houses');
 
-//List all users
-router.get('/list', common.ensureAuthenticated, function(req, res){
+// List
+router.get('/list',/* common.ensureAuthenticated,*/ function(req, res){
   Houses.find({}, function(err, houses){
     if(err){
       console.log(err);
     } else {
       res.render('list_houses', {
         title: "lista de casas",
+        empty_list: "Não existem eventos cadastrados",
         houses: houses
       });
     }
@@ -25,7 +25,7 @@ router.get('/list', common.ensureAuthenticated, function(req, res){
 });
 
 //add new User
-router.get('/add', common.ensureAuthenticated, function(req, res) {
+router.get('/add', /*common.ensureAuthenticated, */function(req, res) {
   res.render('add_houses', {
     title: "Cadastro de Casas",
     label_house_name: "Nome do casa",
@@ -80,8 +80,7 @@ router.post('/add', function(req, res){
     houses.site = req.body.house_site;
     houses.description = req.body.house_description;
     houses.cover = req.body.house_cover;
-    houses.coordinateslat = req.body.house_coordinateslat;
-    houses.coordinateslng = req.body.house_coordinateslng;
+    houses.location.coordinates = [req.body.house_coordinateslat, req.body.house_coordinateslng];
 
     houses.save(function(err){
       if(err){
@@ -106,8 +105,7 @@ router.post('/edit/:id', function(req, res){
   houses.site = req.body.house_site;
   houses.description = req.body.house_description;
   houses.cover = req.body.house_cover;
-  houses.coordinateslat = req.body.house_coordinateslat;
-  houses.coordinateslng = req.body.house_coordinateslng;
+  //houses.location.coordinates = [req.body.house_coordinateslat, req.body.house_coordinateslng];
 
   let query = {_id:req.params.id}
 
@@ -158,24 +156,19 @@ router.delete('/:id', function(req, res){
   });
 });
 
-router.get('/login', function(req, res){
-  res.render('login', {
-    title: "Login"
-  });
-});
-
-//Single user
 router.get('/:id', function(req, res){
   Houses.findById(req.params.id, function(err, house){
     if(err){
       console.log(err);
     } else {
+console.log(house);
+
       res.render('single_house', {
+        currentPath: adminPathHouses,
         house: house
       });
     }
   });
 });
-
 
 module.exports = router;

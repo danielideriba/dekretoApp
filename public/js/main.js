@@ -2,12 +2,13 @@ $(document).ready(function(){
   $('.delete-user').on('click', function(e){
     $target = $(e.target);
     const id = $target.attr('data-id');
+    const currentPath = $target.attr('data-path');
     $.ajax({
       type:'DELETE',
-      url:'/admin/users/'+id,
+      url:currentPath+'/'+id,
       success: function(response){
         console.log('Deletado o id '+id);
-        window.location.href='/admin/users/list?action=del'+id
+        window.location.href=currentPath+'/list?action=del'+id
       },
       error: function(err){
         console.log(err);

@@ -121,6 +121,7 @@ router.get('/list', common.ensureAuthenticated, function(req, res){
     } else {
       res.render('list_users', {
         title: "lista de usuários",
+        empty_list: "Não existem eventos cadastrados",
         users: users
       });
     }

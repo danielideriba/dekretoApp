@@ -20,16 +20,9 @@ block content
       input.form-control(type='text', name='house_site', value=house.site)
       #form-group
       label #{label_house_description}:
-      input.form-control(type='text', name='house_description', value=house.description)
+      textarea.form-control(name='house_description', cols='40', rows='10') #{house.description}
       #form-group
       label #{label_house_cover}:
       input.form-control(type='text', name='house_cover', value=house.cover)
-      #form-group
-      label #{label_house_coordinateslat}:
-      input.form-control(type='text', name='house_coordinateslat', value=house.coordinateslat)
-      #form-group
-      label #{label_house_coordinateslng}:
-      input.form-control(type='text', name='house_coordinateslng', value=house.coordinateslng)
-      #form-group
       br
       button.btn.btn-primary(type='submit',value='Submit') Enviar

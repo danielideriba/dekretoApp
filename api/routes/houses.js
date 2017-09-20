@@ -8,6 +8,8 @@ let Houses = require('../../admin/models/houses');
 //List all users
 router.get('/list', function(req, res){
   var query = {__v: 0};
+  //var order = {sort: {name: -1}};
+
   Houses.find({}, query, function(err, houses){
     if(err){
       console.log(err);
@@ -43,8 +45,7 @@ router.get('/list/:lat&:lng', function(req, res){
 
   if( (latitude != undefined) && (longitude != undefined) ) {
     var query = Houses.find({});
-    query.where('coordinateslng', longitude);
-    query.where('coordinateslat', latitude);
+    query.where('location').near({ center: { coordinates: [10, 10], type: 'Point' }, maxDistance: 5 });
 
     query.exec(function (err, houses) {
             if(err){

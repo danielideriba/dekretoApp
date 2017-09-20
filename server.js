@@ -19,7 +19,7 @@ const router = express.Router();
 //connect with mongodb
 mongoose.Promise = global.Promise;
 mongoose.connect(config.database, { useMongoClient: true });
-let db = mongoose.connection;
+let db = mongoose.connection; 
 
 //Check connection
 db.once('openUri', function(){
@@ -90,7 +90,7 @@ app.get('*', function(req, res, next){
 });
 
 //Home admin
-app.get(adminPath, common.ensureAuthenticated, function(req, res){
+app.get(adminPath, /*common.ensureAuthenticated,*/ function(req, res){
   res.render('index', {
     title: "SISTEMA ADMINSTRATIVO DEKRETO",
     description: "Sistema que alimenta a RESTApi",
@@ -112,8 +112,8 @@ app.use(adminPath+'/users/', registerUsers);
 let registerHouses = require(__dirname+adminPath+'/routes/houses');
 app.use(adminPath+'/houses/', registerHouses);
 
-let registerParties = require(__dirname+adminPath+'/routes/parties');
-app.use(adminPath+'/parties/', registerParties);
+let registerEvents = require(__dirname+adminPath+'/routes/events');
+app.use(adminPath+'/events/', registerEvents);
 
 //Routes api
 let registerUsersApi = require(__dirname+apiPath+'/routes/users');

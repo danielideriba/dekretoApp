@@ -1,0 +1,43 @@
+extends layout
+
+block content
+    h1 #{title}
+    form(method='POST' action='/admin/events/add')
+      #form-group
+      label #{label_events_name}:
+      input.form-control(type='text', name='events_name')
+      br
+      #form-group
+      label #{label_events_date}:
+      input.form-control(type='text', name='events_date')
+      br
+      #form-group
+      label #{label_events_hour}:
+      input.form-control(type='text', name='events_hour')
+      br
+      #form-group
+      label #{label_events_presence}:
+      input.form-control(type='text', name='events_presence')
+      br
+      #form-group
+      label #{label_events_cover}:
+      input.form-control(type='text', name='events_cover')
+      br
+      #form-group
+      label #{label_events_style}:
+      input.form-control(type='text', name='events_style')
+      br
+      #form-group
+      label #{label_events_popularity}:
+      input.form-control(type='text', name='events_popularity')
+      br  
+      #form-group
+      label #{label_events_belong_to}:
+      //input.form-control(type='text', name='events_belong')
+      select
+          each house in houses
+            option(value=house.id) #{house.name}
+      br  
+      #form-group
+      button.btn.btn-primary(type='submit',value='Submit') Enviar
+      

@@ -12,11 +12,9 @@ block content
   br
   label= house.description
   br
-  label= house.cover
+  img(src=house.cover)
   br
-  label= house.coordinateslat
-  br
-  label= house.coordinateslng
+  div(id="map")
   hr
   a.btn.btn-default(href='/admin/houses/edit/'+house._id) Editar
-  a.btn.btn-danger.delete-user(href='#', data-id=house._id) Deletar
+  a.btn.btn-danger.delete-user(href='#', data-path=currentPath, data-id=house._id) Deletar

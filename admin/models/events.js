@@ -1,38 +1,23 @@
 'use strict';
 const mongoose = require('mongoose');
-const HousesSchema = mongoose.Schema({
+const EventsSchema = mongoose.Schema({
   name: {
     type: String,
     require: true,
     default: ''
   },
-  address: {
+  eventDate: {
     type: String,
     require: true,
     default: ''
   },
-  closeto: {
+  eventHour: {
     type: String,
     require: true,
     default: ''
   },
-  email :{
-    type: String,
-    require: true,
-    default: ''
-  },
-  phone: {
-    type: String,
-    require: true,
-    default: ''
-  },
-  site: {
-    type: String,
-    require: true,
-    default: ''
-  },
-  description: {
-    type: String,
+  presence: {
+    type: Boolean,
     require: true,
     default: ''
   },
@@ -41,28 +26,22 @@ const HousesSchema = mongoose.Schema({
     require: true,
     default: ''
   },
-  /*coordinateslat: {
+  style: {
     type: String,
     require: true,
     default: ''
   },
-  coordinateslng: {
+  popularity: {
     type: String,
     require: true,
     default: ''
-  },*/
-  location: {
-    'type': {
-      type: String,
-      enum: "Point",
-      default: "Point"
-    },
-    coordinates: {
-      type: [Number],
-      default: [0,0]
-    }
+  },
+  id_houses: {
+    type: String,
+    require: true,
+    default: ''
   },
   datetime: { type : Date, default: Date.now }
 });
 
-let Houses = module.exports = mongoose.model('Houses', HousesSchema);
+let Events = module.exports = mongoose.model('Events', EventsSchema);
