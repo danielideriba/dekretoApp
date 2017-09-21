@@ -2,13 +2,16 @@ extends layout
 
 block content
     h1 #{title}
-    form(method='POST' action='/admin/houses/edit/'+house._id)
+    form(method='POST' enctype='multipart/form-data' action='/admin/houses/edit/'+house._id)
       #form-group
       label #{label_house_name}:
       input.form-control(type='text', name='house_name', value=house.name)
       #form-group
       label #{label_house_address}:
       input.form-control(type='text', name='house_address', value=house.address)
+      #form-group
+      label #{label_house_closeto}:
+      input.form-control(type='text', name='house_closeto', value=house.closeto)
       #form-group
       label #{label_house_email}:
       input.form-control(type='text', name='house_email', value=house.email)
@@ -24,5 +27,14 @@ block content
       #form-group
       label #{label_house_cover}:
       input.form-control(type='text', name='house_cover', value=house.cover)
+      #form-group
+      label #{label_house_thumb}:
+      input.form-control(type='file', name='house_thumb', value=house.thumb, accept='image/*')
+      #form-group
+      label #{label_house_coordinateslat}:
+      input.form-control(type='text', name='house_coordinateslat', value=house.coordinateslat)
+      #form-group
+      label #{label_house_coordinateslat}:
+      input.form-control(type='text', name='house_coordinateslng', value=house.coordinateslng)
       br
       button.btn.btn-primary(type='submit',value='Submit') Enviar

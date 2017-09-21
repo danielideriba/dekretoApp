@@ -36,12 +36,17 @@ const HousesSchema = mongoose.Schema({
     require: true,
     default: ''
   },
+  thumb: {
+    type: String,
+    require: true,
+    default: ''
+  },
   cover: {
     type: String,
     require: true,
     default: ''
   },
-  /*coordinateslat: {
+  coordinateslat: {
     type: String,
     require: true,
     default: ''
@@ -50,8 +55,8 @@ const HousesSchema = mongoose.Schema({
     type: String,
     require: true,
     default: ''
-  },*/
-  location: {
+  },
+  /*location: {
     'type': {
       type: String,
       enum: "Point",
@@ -61,7 +66,7 @@ const HousesSchema = mongoose.Schema({
       type: [Number],
       default: [0,0]
     }
-  },
+  },*/
   datetime: { type : Date, default: Date.now }
 });
 

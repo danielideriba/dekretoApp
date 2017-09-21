@@ -4,6 +4,8 @@ block content
   h1= house.name
   label= house.address
   br
+  label= house.closeto
+  br
   label= house.email
   br
   label= house.phone
@@ -14,6 +16,10 @@ block content
   br
   img(src=house.cover)
   br
+  img(src=house.thumb)
+  br
+  input(type="hidden" id="lat" value=house.coordinateslat)
+  input(type="hidden" id="lng" value=house.coordinateslng)
   div(id="map")
   hr
   a.btn.btn-default(href='/admin/houses/edit/'+house._id) Editar

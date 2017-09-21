@@ -5,6 +5,9 @@ const bcrypt = require('bcryptjs');
 const passport = require('passport');
 const adminPathHouses = '/admin/houses';
 const common = require('../utils/common');
+const path = require('path');
+const formidable = require('formidable');
+const fs = require('fs');
 
 //models
 let Houses = require('../models/houses');
@@ -30,11 +33,13 @@ router.get('/add', /*common.ensureAuthenticated, */function(req, res) {
     title: "Cadastro de Casas",
     label_house_name: "Nome do casa",
     label_house_address: "Endereço",
+    label_house_closeto: "Metrô mais próximo",
     label_house_email: "E-Mail",
     label_house_phone: "Telefone",
     label_house_site: "Site",
     label_house_description: "Descrição",
     label_cover: "Capa",
+    label_thumb: "Thumb",
     label_house_coordinateslat: "Latitude",
     label_house_coordinateslng: "Longitude"
   });
@@ -67,6 +72,7 @@ router.post('/add', function(req, res){
       label_house_site: "Site",
       label_house_description: "Descrição",
       label_cover: "Capa",
+      label_thumb: "Thumb",
       label_house_coordinateslat: "Latitude",
       label_house_coordinateslng: "Longitude",
       errors: errors
@@ -75,12 +81,36 @@ router.post('/add', function(req, res){
     let houses = new Houses();
     houses.name = req.body.house_name;
     houses.address = req.body.house_address;
+    houses.closeto = req.body.house_closeto;
     houses.email = req.body.house_email;
     houses.phone = req.body.house_phone;
     houses.site = req.body.house_site;
     houses.description = req.body.house_description;
     houses.cover = req.body.house_cover;
-    houses.location.coordinates = [req.body.house_coordinateslat, req.body.house_coordinateslng];
+    houses.thumb = req.body.house_thumb;
+    houses.coordinateslat = req.body.house_coordinateslat;
+    houses.coordinateslng = req.body.house_coordinateslng;
+
+    //Image upload
+    // var form = new formidable.IncomingForm();
+    //
+    // form.multiples = true;
+    // form.uploadDir = '../uploads';
+    //
+    // console.log(form);
+    //
+    // form.on('file', function(field, file) {
+    //   fs.rename(file.path, path.join(form.uploadDir, file.name));
+    //   console.log(file.name);
+    // });
+    // form.on('error', function(err) {
+    //   console.log('An error has occured: \n' + err);
+    // });
+    // form.on('end', function() {
+    //   res.end('success');
+    //   console.log("UPLOAD SUCESSO")
+    // });
+    // form.parse(req);
 
     houses.save(function(err){
       if(err){
@@ -100,14 +130,33 @@ router.post('/edit/:id', function(req, res){
   let houses = {};
   houses.name = req.body.house_name;
   houses.address = req.body.house_address;
+  houses.closeto = req.body.house_closeto
   houses.email = req.body.house_email;
   houses.phone = req.body.house_phone;
   houses.site = req.body.house_site;
   houses.description = req.body.house_description;
   houses.cover = req.body.house_cover;
-  //houses.location.coordinates = [req.body.house_coordinateslat, req.body.house_coordinateslng];
+  houses.thumb = req.body.house_thumb;
+  houses.coordinateslat = req.body.house_coordinateslat;
+  houses.coordinateslng = req.body.house_coordinateslng;
 
   let query = {_id:req.params.id}
+
+  //Image upload
+  // var form = new formidable.IncomingForm();
+  // form.multiples = true;
+  // form.uploadDir = path.join(__dirname, '/admin/uploads');
+  // form.on('file', function(field, file) {
+  //   fs.rename(file.path, path.join(form.uploadDir, file.name));
+  // });
+  // form.on('error', function(err) {
+  //   console.log('An error has occured: \n' + err);
+  // });
+  // form.on('end', function() {
+  //   res.end('success');
+  // });
+  // form.parse(req);
+  //Image upload
 
   Houses.update(query, houses, {upsert:true}, function(err){
     if(err){
@@ -131,11 +180,13 @@ router.get('/edit/:id', function(req, res){
         title: "Editar Casas",
         label_house_name: "Nome do casa",
         label_house_address: "Endereço",
+        label_house_closeto: "Metrô mais próximo",
         label_house_email: "E-Mail",
         label_house_phone: "Telefone",
         label_house_site: "Site",
         label_house_description: "Descrição",
         label_house_cover: "Capa",
+        label_house_thumb: "Thumb",
         label_house_coordinateslat: "Latitude",
         label_house_coordinateslng: "Longitude",
         house: house
@@ -161,8 +212,6 @@ router.get('/:id', function(req, res){
     if(err){
       console.log(err);
     } else {
-console.log(house);
-
       res.render('single_house', {
         currentPath: adminPathHouses,
         house: house
