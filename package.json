@@ -17,10 +17,10 @@
     "url": "https://github.com/danielideriba/dekretoApp/issues"
   },
   "homepage": "https://github.com/danielideriba/dekretoApp#readme",
-  "devDependecies": {
+  "devDependencies": {
     "nodemon": "^1.11.0"
   },
-  "dependecies": {
+  "dependencies": {
     "express": "^4.14.0",
     "bcryptjs": "^2.4.3",
     "connect-flash": "^0.1.1",
