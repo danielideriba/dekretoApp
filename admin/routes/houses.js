@@ -5,9 +5,16 @@ const bcrypt = require('bcryptjs');
 const passport = require('passport');
 const adminPathHouses = '/admin/houses';
 const common = require('../utils/common');
-const path = require('path');
-const formidable = require('formidable');
-const fs = require('fs');
+// const path = require('path');
+// var multer = require('multer');
+// var storage =   multer.diskStorage({
+//   destination: function (req, file, callback) {
+//     callback(null, './admin/uploads');
+//   },
+//   filename: function (req, file, callback) {
+//     callback(null, file.fieldname + '-' + Date.now());
+//   }
+// });
 
 //models
 let Houses = require('../models/houses');
@@ -91,26 +98,14 @@ router.post('/add', function(req, res){
     houses.coordinateslat = req.body.house_coordinateslat;
     houses.coordinateslng = req.body.house_coordinateslng;
 
-    //Image upload
-    // var form = new formidable.IncomingForm();
-    //
-    // form.multiples = true;
-    // form.uploadDir = '../uploads';
-    //
-    // console.log(form);
-    //
-    // form.on('file', function(field, file) {
-    //   fs.rename(file.path, path.join(form.uploadDir, file.name));
-    //   console.log(file.name);
+    // //Image upload
+    // var upload = multer({ storage : storage}).single('house_thumb');
+    // upload(req,res,function(err) {
+    //     if(err) {
+    //         return res.end("Error uploading file.");
+    //     }
+    //     console.log("File is uploaded");
     // });
-    // form.on('error', function(err) {
-    //   console.log('An error has occured: \n' + err);
-    // });
-    // form.on('end', function() {
-    //   res.end('success');
-    //   console.log("UPLOAD SUCESSO")
-    // });
-    // form.parse(req);
 
     houses.save(function(err){
       if(err){

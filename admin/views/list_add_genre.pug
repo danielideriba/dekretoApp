@@ -1,0 +1,11 @@
+extends layout
+
+block content
+    h1 #{title}
+    form(method='POST' action='/admin/genre/add')
+      #form-group
+      label #{label_user_name}:
+      input.form-control(type='text', placeholder='Ex..Pagode', name='genre_name')
+      br
+      #form-group
+      button.btn.btn-primary(type='submit',value='Submit') Criar

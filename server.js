@@ -19,7 +19,7 @@ const router = express.Router();
 //connect with mongodb
 mongoose.Promise = global.Promise;
 mongoose.connect(config.database, { useMongoClient: true });
-let db = mongoose.connection; 
+let db = mongoose.connection;
 
 //Check connection
 db.once('openUri', function(){
@@ -114,6 +114,9 @@ app.use(adminPath+'/houses/', registerHouses);
 
 let registerEvents = require(__dirname+adminPath+'/routes/events');
 app.use(adminPath+'/events/', registerEvents);
+
+let registerGenre = require(__dirname+adminPath+'/routes/genre');
+app.use(adminPath+'/genre/', registerGenre);
 
 //Routes api
 let registerUsersApi = require(__dirname+apiPath+'/routes/users');
