@@ -12,7 +12,7 @@ const common = require('../utils/common');
 let Users = require('../models/users');
 
 //add new User
-router.get('/add', common.ensureAuthenticated, function(req, res) {
+router.get('/add', function(req, res) {
   res.render('add_users', {
     title: "Cadastro de Usuários",
     label_user_name: "Nome do usuário",

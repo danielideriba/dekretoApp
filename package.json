@@ -18,10 +18,13 @@
   },
   "homepage": "https://github.com/danielideriba/dekretoApp#readme",
   "devDependencies": {
-    "nodemon": "^1.11.0"
+    "body-parser": "^1.18.1",
+    "jsonwebtoken": "^8.0.1",
+    "nodemon": "^1.12.1"
   },
   "dependencies": {
     "express": "^4.14.0",
+    "body-parser": "^1.18.1",
     "bcryptjs": "^2.4.3",
     "connect-flash": "^0.1.1",
     "express-messages": "^1.0.1",

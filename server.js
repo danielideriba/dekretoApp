@@ -90,7 +90,7 @@ app.get('*', function(req, res, next){
 });
 
 //Home admin
-app.get(adminPath, /*common.ensureAuthenticated,*/ function(req, res){
+app.get(adminPath, common.ensureAuthenticated, function(req, res){
   res.render('index', {
     title: "SISTEMA ADMINSTRATIVO DEKRETO",
     description: "Sistema que alimenta a RESTApi",
