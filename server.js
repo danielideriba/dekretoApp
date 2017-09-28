@@ -128,6 +128,12 @@ app.use(apiPath+'/users/', registerUsersApi);
 let registerHousesApi = require(__dirname+apiPath+'/routes/houses');
 app.use(apiPath+'/houses/', registerHousesApi);
 
+let registerGenresApi = require(__dirname+apiPath+'/routes/genres');
+app.use(apiPath+'/genres/', registerGenresApi);
+
+let registerTypesApi = require(__dirname+apiPath+'/routes/types');
+app.use(apiPath+'/types/', registerTypesApi);
+
 app.listen(port, function(){
     console.log('Server DekretoApi iniciado na porta: ' + port);
 });
