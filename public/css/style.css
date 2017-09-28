@@ -15,3 +15,19 @@
   width:100%;
   height:400px;
 }
+
+.list-form {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.list-form li {
+  float: left;
+  margin: 10px;
+}
+
+.list-form li input {
+  margin-right:10px;
+}

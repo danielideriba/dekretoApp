@@ -36,8 +36,18 @@ const EventsSchema = mongoose.Schema({
     require: true,
     default: ''
   },
+  typeEvent: {
+    type: String,
+    require: true,
+    default: ''
+  },
   id_houses: {
     type: String,
+    require: true,
+    default: ''
+  },
+  id_genre: {
+    type: Array,
     require: true,
     default: ''
   },

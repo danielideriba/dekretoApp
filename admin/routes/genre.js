@@ -18,7 +18,8 @@ router.get('/list',/* common.ensureAuthenticated,*/ function(req, res){
         title: "lista de gêneros",
         empty_list: "Não existem eventos cadastrados",
         label_user_name: "Novo Gênero",
-        genres: genres
+        genres: genres,
+        currentPath: adminPathGenre
       });
     }
   });
@@ -33,10 +34,18 @@ router.post('/add', function(req, res){
   let errors = req.validationErrors();
 
   if(errors){
-    res.render('list_add_genre', {
-      title: "lista de gêneros",
-      empty_list: "Não existem eventos cadastrados",
-      label_user_name: "Novo Gênero"
+      Genre.find({}, function(err, genres){
+        if(err){
+          console.log(err);
+        } else {
+          res.render('list_add_genre', {
+            title: "lista de gêneros",
+            empty_list: "Não existem eventos cadastrados",
+            label_user_name: "Novo Gênero",
+            genres: genres,
+            currentPath: adminPathGenre
+          });
+        }
     });
   } else {
     let genre = new Genre();
@@ -47,12 +56,24 @@ router.post('/add', function(req, res){
         console.log(err);
         return;
       } else {
-        req.flash('success', 'Usuário Inserido');
+        req.flash('success', 'Gênero Inserido');
         console.log('Genero Inserido');
         res.redirect(adminPathGenre+'/list');
       }
     });
   }
 });
+
+//Deletar
+router.delete('/:id', function(req, res){
+  let query = {_id:req.params.id}
+  Genre.remove(query, function(err){
+    if(err){
+      console.log(err);
+    }
+    res.send('success');
+  });
+});
+
 
 module.exports = router;

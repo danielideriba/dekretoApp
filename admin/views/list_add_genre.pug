@@ -15,6 +15,6 @@ block content
         ul.list-group
           each genre, i in genres
             li.list-group-item
-              span #{genre.name}
+              span(class='glyphicon glyphicon-trash delete-user' data-path=currentPath, data-id=genre._id) #{genre.name}
       else
         span #{empty_list}

@@ -1,6 +1,6 @@
 'use strict';
 const mongoose = require('mongoose');
-const GenreSchema = mongoose.Schema({
+const TypesSchema = mongoose.Schema({
   name: {
     type: String,
     require: true,
@@ -9,4 +9,4 @@ const GenreSchema = mongoose.Schema({
   datetime: { type : Date, default: Date.now }
 });
 
-let Genre = module.exports = mongoose.model('Genre', GenreSchema);
+let Types = module.exports = mongoose.model('Types', TypesSchema);

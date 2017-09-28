@@ -9,7 +9,7 @@ block content
       br
       #form-group
       label #{label_events_date}:
-      input.form-control(type='text', name='events_date')
+      input.form-control(type='text', name='events_date') 
       br
       #form-group
       label #{label_events_hour}:
@@ -24,20 +24,33 @@ block content
       input.form-control(type='text', name='events_cover')
       br
       #form-group
-      label #{label_events_style}:
-      input.form-control(type='text', name='events_style')
-      br
-      #form-group
       label #{label_events_popularity}:
       input.form-control(type='text', name='events_popularity')
       br  
       #form-group
+      label #{label_events_style}:
+      ul.list-form
+        each genre in genres
+          li
+            input.form-checkbox(type='checkbox',id-genre=genre._id,name='events_style')
+            span #{genre.name}
+        br
+      #form-group
       label #{label_events_belong_to}:
-      //input.form-control(type='text', name='events_belong')
-      select
-          each house in houses
-            option(value=house.id) #{house.name}
+      div
+        select
+          option(value="selecione a casa") Selecione a casa
+            each house in houses
+              option(value=house.id) #{house.name}
       br  
+      #form-group
+      label #{label_events_type}:
+      ul.list-form
+        each type in types
+          li
+            input.form-checkbox(type='checkbox',id-type=type._id,name='events_type')
+            span #{type.name}
+        br
       #form-group
       button.btn.btn-primary(type='submit',value='Submit') Enviar
       

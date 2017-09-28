@@ -118,6 +118,9 @@ app.use(adminPath+'/events/', registerEvents);
 let registerGenre = require(__dirname+adminPath+'/routes/genre');
 app.use(adminPath+'/genre/', registerGenre);
 
+let registerTypes = require(__dirname+adminPath+'/routes/types');
+app.use(adminPath+'/types/', registerTypes);
+
 //Routes api
 let registerUsersApi = require(__dirname+apiPath+'/routes/users');
 app.use(apiPath+'/users/', registerUsersApi);
