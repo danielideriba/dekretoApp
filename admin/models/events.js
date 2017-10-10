@@ -1,8 +1,18 @@
 'use strict';
 const mongoose = require('mongoose');
+require('mongoose-currency').loadType(mongoose);
+const Currency = mongoose.Types.Currency;
+
 const EventsSchema = mongoose.Schema({
   name: {
     type: String,
+    trim: true,
+    require: true,
+    default: ''
+  },
+  description: {
+    type: String,
+    trim: true,
     require: true,
     default: ''
   },
@@ -16,8 +26,23 @@ const EventsSchema = mongoose.Schema({
     require: true,
     default: ''
   },
-  presence: {
-    type: Boolean,
+  priceWithList: {
+    type: Currency,
+    require: true,
+    default: ''
+  },
+  priceWithoutList: {
+    type: Currency,
+    require: true,
+    default: ''
+  },
+  priceBefore: {
+    type: Currency,
+    require: true,
+    default: ''
+  },
+  priceSingle: {
+    type: Currency,
     require: true,
     default: ''
   },
@@ -31,13 +56,18 @@ const EventsSchema = mongoose.Schema({
     require: true,
     default: ''
   },
-  popularity: {
+  birthday: {
+    type: String,
+    require: true,
+    default: ''
+  },
+  typeConditions: {
     type: String,
     require: true,
     default: ''
   },
   typeEvent: {
-    type: String,
+    type: Array,
     require: true,
     default: ''
   },

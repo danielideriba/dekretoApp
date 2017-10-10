@@ -29,6 +29,77 @@ router.get('/list', /*common.ensureAuthenticated,*/ function(req, res){
 
 //add new
 router.get('/add', /*common.ensureAuthenticated,*/ function(req, res) {
+  renderData(req, res);
+});
+
+router.post('/add', /*common.ensureAuthenticated,*/ function(req, res) {
+  //Validation
+  req.checkBody('events_name','Nome do evento é obrigatório').notEmpty();
+  req.checkBody('events_description','descrição é obrigatório').notEmpty();
+  req.checkBody('events_date','Data é obrigatório').notEmpty();
+  req.checkBody('events_hour','Hora é obrigatório').notEmpty();
+  req.checkBody('events_price_with_list','Valor com lista é obrigatório').notEmpty();
+  req.checkBody('events_price_without_list','Valor sem lista é obrigatório').notEmpty();
+  req.checkBody('events_price_before','Antecipado é obrigatório').notEmpty();
+  req.checkBody('events_price_birthday','Aniversariante é obrigatório').notEmpty();
+  req.checkBody('events_type_conditions','Condições é obrigatório').notEmpty();
+  req.checkBody('events_price_single','Valor único é obrigatório').notEmpty();
+  /*req.checkBody('events_style','Estilo é obrigatório').notEmpty();
+  req.checkBody('events_houses','Casa é obrigatório').notEmpty();
+  req.checkBody('events_type','Tipo é obrigatório').notEmpty();*/
+
+  //Get errors
+  let errors = req.validationErrors();
+
+  if(errors){
+    renderData(req, res);
+  } else {
+      let events = new Events();
+      events.name = req.body.events_name;
+      events.description = req.body.events_description;
+      events.eventDate = req.body.events_date;
+      events.eventHour = req.body.events_hour;
+      events.priceWithList = req.body.events_price_with_list;
+      events.priceWithoutList = req.body.events_price_without_list
+      events.priceBefore = req.body.price_before;
+      events.priceSingle = req.body.price_single;
+      events.cover = req.body.cover;
+      events.style = req.body.style;
+      events.birthday = req.body.birthday;
+      events.typeConditions = req.body.events_type_conditions;
+      events.typeEvent = req.body.events_type;
+      events.id_houses = req.body.events_houses;
+      events.id_genre = req.body.events_genre;
+
+      //Save data
+      events.save(function(err){
+        if(err){
+          console.log(err);
+          return;
+        } else {
+          req.flash('success', 'Evento Inserido');
+          console.log('Evento Inserido');
+          res.redirect(adminPathEvents+'/list');
+        }
+      });
+  }
+});
+
+router.get('/list', /*common.ensureAuthenticated,*/ function(req, res) {
+  Events.find({}, function(err, events){
+    if(err){
+      console.log(err);
+    } else {
+      res.render('list_events', {
+        title: "lista de Eventos",
+        empty_list: "Não existem eventos cadastrados",
+        events: events
+      });
+    }
+  });
+});
+
+function renderData(req, res){
   var query = {"name": 1};
   Houses.find({}, query, function (err, houses) {
     if(err){
@@ -45,9 +116,15 @@ router.get('/add', /*common.ensureAuthenticated,*/ function(req, res) {
               res.render('add_events', {
                 title: "Cadastro de Eventos",
                 label_events_name: "Nome do Evento",
-                label_events_date: "Data", //Campo date
-                label_events_hour: "Hora", // Mascara de hora
-                label_events_presence: "Com lista ou sem", //Checkbox
+                label_events_description: "Descrição do evento",
+                label_events_date: "Data",
+                label_events_hour: "Hora",
+                label_events_priceWithList: "Valor COM lista",
+                label_events_priceWithoutList: "Valor SEM lista",
+                label_events_priceBefore: "Antecipado",
+                label_events_priceSingle: "Preço único",
+                label_events_birthday: "Aniversariante",
+                label_events_typeConditions: "Condição do VIP (não aniversariante)",
                 label_events_cover: "Imagem",
                 label_events_style: "Estilo Musical", //Selectbox
                 label_events_popularity: "Popularidade", // Rating
@@ -59,12 +136,11 @@ router.get('/add', /*common.ensureAuthenticated,*/ function(req, res) {
                 types: types
               });
             }
-          })
+          });
         }
       });
     }
   });
-});
-
+}
 
 module.exports = router;
