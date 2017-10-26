@@ -36,7 +36,7 @@ db.on('error', function(err){
 app.set('views', path.join(__dirname, '/admin/views'));
 app.set('api', path.join(__dirname, '/api'));
 app.set('view engine', 'pug');
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 //set public folder

@@ -1,0 +1,19 @@
+extends layout
+
+block content
+  h1= events.name
+  label= events.name
+  label=events.datetime
+  label=events.id_genre
+  label=events.typeEvent
+  label=events.typeConditions
+  label=events.priceWithoutList
+  label=events.priceWithList
+  label=events.eventHour
+  label=events.eventDate
+  label=events.description
+  
+  br
+  hr
+  a.btn.btn-default(href='/admin/events/edit/'+events._id) Editar
+  a.btn.btn-danger.delete-user(href='#', data-path=currentPath, data-id=events._id) Deletar

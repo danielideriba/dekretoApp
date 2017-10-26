@@ -1,0 +1,10 @@
+extends layout
+
+block content
+    h1 #{title}
+    form(method='POST' enctype='multipart/form-data' action='/admin/events/edit/'+events._id)
+      #form-group
+      label #{label_events_name}:
+      input.form-control(type='text', name='events_name', value=events.name)
+      br
+      button.btn.btn-primary(type='submit',value='Submit') Enviar

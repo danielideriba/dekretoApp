@@ -99,6 +99,32 @@ router.get('/list', /*common.ensureAuthenticated,*/ function(req, res) {
   });
 });
 
+//Edit Events
+router.get('/edit/:id', function(req, res){
+  console.log(req)
+  Events.findById(req.params.id, function(err, events){
+    if(err){
+      console.log(err);
+    } else {
+      renderData(req, res);
+    }
+  });
+});
+
+router.get('/:id', function(req, res){
+  Events.findById(req.params.id, function(err, events){
+    console.log(events);
+    if(err){
+      console.log(err);
+    } else {
+      res.render('single_events', {
+        currentPath: adminPathEvents,
+        events: events
+      });
+    }
+  });
+});
+
 function renderData(req, res){
   var query = {"name": 1};
   Houses.find({}, query, function (err, houses) {
