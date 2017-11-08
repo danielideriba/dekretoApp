@@ -2,17 +2,29 @@ extends layout
 
 block content
   h1= events.name
-  label= events.name
+  label=events.name
+  br
   label=events.datetime
-  label=events.id_genre
-  label=events.typeEvent
+  br
+  each type, i in types
+    label=type.name
+    br
+  br
   label=events.typeConditions
+  br
   label=events.priceWithoutList
+  br
   label=events.priceWithList
+  br
   label=events.eventHour
+  br
   label=events.eventDate
+  br
   label=events.description
-  
+  br
+  each genre, i in genres
+    label=genre.name
+    br
   br
   hr
   a.btn.btn-default(href='/admin/events/edit/'+events._id) Editar

@@ -101,7 +101,6 @@ router.get('/list', /*common.ensureAuthenticated,*/ function(req, res) {
 
 //Edit Events
 router.get('/edit/:id', function(req, res){
-  console.log(req)
   Events.findById(req.params.id, function(err, events){
     if(err){
       console.log(err);
@@ -113,13 +112,29 @@ router.get('/edit/:id', function(req, res){
 
 router.get('/:id', function(req, res){
   Events.findById(req.params.id, function(err, events){
-    console.log(events);
     if(err){
       console.log(err);
     } else {
-      res.render('single_events', {
-        currentPath: adminPathEvents,
-        events: events
+      var queryGenre = {"_id": {$in: events.id_genre}};
+      Genre.find(queryGenre, function(err, genres) {
+        if(err){
+          console.log(err);
+        } else {
+          var queryType = {"_id": {$in: events.typeEvent}};
+          Types.find(queryType, function(err, types) {
+            if(err){
+              console.log(err);
+            } else {
+              res.render('single_events', {
+                currentPath: adminPathEvents,
+                events: events,
+                genres: genres,
+                types: types,
+                empty_list: "Não existem eventos cadastrados"
+              });
+            }
+          });
+        }
       });
     }
   });
@@ -168,5 +183,6 @@ function renderData(req, res){
     }
   });
 }
+
 
 module.exports = router;
