@@ -58,8 +58,8 @@ block content
       #form-group
       label #{label_events_belong_to}:
       div
-        select
-          option(value="selecione a casa", name='events_houses') Selecione a casa
+        select(name='events_houses')
+          option(value="selecione a casa") Selecione a casa
             each house in houses
               option(value=house.id) #{house.name}
       br  

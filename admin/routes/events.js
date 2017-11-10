@@ -63,8 +63,7 @@ router.post('/add', /*common.ensureAuthenticated,*/ function(req, res) {
       events.priceWithoutList = req.body.events_price_without_list
       events.priceBefore = req.body.price_before;
       events.priceSingle = req.body.price_single;
-      events.cover = req.body.cover;
-      events.style = req.body.style;
+      events.cover = req.body.events_cover;
       events.birthday = req.body.birthday;
       events.typeConditions = req.body.events_type_conditions;
       events.typeEvent = req.body.events_type;
@@ -125,12 +124,19 @@ router.get('/:id', function(req, res){
             if(err){
               console.log(err);
             } else {
-              res.render('single_events', {
-                currentPath: adminPathEvents,
-                events: events,
-                genres: genres,
-                types: types,
-                empty_list: "Não existem eventos cadastrados"
+              Houses.findById(events.id_houses, function(err, houses) {
+                if(err){
+                  console.log(err);
+                } else {
+                  res.render('single_events', {
+                    currentPath: adminPathEvents,
+                    events: events,
+                    genres: genres,
+                    types: types,
+                    houses_name: houses.name,
+                    empty_list: "Não existem eventos cadastrados"
+                  });
+                }
               });
             }
           });

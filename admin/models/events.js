@@ -51,7 +51,7 @@ const EventsSchema = mongoose.Schema({
     require: true,
     default: ''
   },
-  style: {
+  cover: {
     type: String,
     require: true,
     default: ''
