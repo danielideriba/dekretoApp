@@ -120,11 +120,11 @@ router.post(authPath, function(req, res) {
   Users.findOne(query, function(err, user) {
     if (err) throw err;
     if (!user) {
-      res.json({ success: false, message: 'Authentication failed. User not found.' });
+      res.json({ success: false, message: 'Falha na autenticação. Usuário não encontrado.' });
     } else if (user) {
       bcrypt.compare(req.body.password, user.password, function(err, isMatch){
             if (!isMatch) {
-              res.json({ success: false, message: 'Authentication failed. Wrong password.' });
+              res.json({ success: false, message: 'Falha na autenticação. Senha inválida.' });
             } else {
               const payload = {
                 admin: user.user_name
@@ -135,7 +135,7 @@ router.post(authPath, function(req, res) {
               // return the information including token as JSON
               res.json({
                 success: true,
-                message: 'Enjoy your token!',
+                message: 'Token gerado!',
                 token: token
               });
             }
@@ -143,6 +143,32 @@ router.post(authPath, function(req, res) {
     }
   });
 });
+
+router.use(function(req, res, next) {
+  // check header or url parameters or post parameters for token
+  var token = req.body.token || req.query.token || req.headers['x-access-token'];
+  // decode token
+  if (token) {
+    // verifies secret and checks exp
+    jwt.verify(token, app.get('superSecret'), function(err, decoded) {
+      if (err) {
+        return res.json({ success: false, message: 'Falha na autenticação.' });
+      } else {
+        // if everything is good, save to request for use in other routes
+        req.decoded = decoded;
+        next();
+      }
+    });
+  } else {
+    // if there is no token
+    // return an error
+    return res.status(403).send({
+        success: false,
+        message: 'Token não fornecido.'
+    });
+  }
+});
+
 
 
 //Routes admin
