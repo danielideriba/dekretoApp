@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const port = 3000;
 const adminPath = '/admin';
 const apiPath = '/api';
+const authPath = '/authenticate';
 const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
 const flash = require('connect-flash');
@@ -11,10 +12,17 @@ const session = require('express-session');
 const passport = require('passport');
 const config = require(__dirname+'/admin/config/database');
 const common = require(__dirname+'/admin/utils/common');
+const bcrypt = require('bcryptjs');
 
 //init
 const app = express();
 const router = express.Router();
+
+const jwt = require('jsonwebtoken');
+app.set('superSecret', config.secret);
+
+// use morgan to log requests to the console
+//app.use(morgan('dev'));
 
 //connect with mongodb
 mongoose.Promise = global.Promise;
@@ -104,6 +112,38 @@ router.get('/', function(req, res){
   res.json({ message: 'Bem vindo a API dekretoApp' });
 });
 app.use('/api', router);
+
+//Post to authenticate on our backend
+app.use(apiPath+authPath, router);
+router.post(authPath, function(req, res) {
+  let query = {user_name:req.body.name}
+  Users.findOne(query, function(err, user) {
+    if (err) throw err;
+    if (!user) {
+      res.json({ success: false, message: 'Authentication failed. User not found.' });
+    } else if (user) {
+      bcrypt.compare(req.body.password, user.password, function(err, isMatch){
+            if (!isMatch) {
+              res.json({ success: false, message: 'Authentication failed. Wrong password.' });
+            } else {
+              const payload = {
+                admin: user.user_name
+              };
+              var token = jwt.sign(payload, app.get('superSecret'), {
+                expiresIn: 1440 // expires in 24 hours
+              });
+              // return the information including token as JSON
+              res.json({
+                success: true,
+                message: 'Enjoy your token!',
+                token: token
+              });
+            }
+        });
+    }
+  });
+});
+
 
 //Routes admin
 let registerUsers = require(__dirname+adminPath+'/routes/users');

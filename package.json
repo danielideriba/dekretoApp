@@ -19,7 +19,7 @@
   "homepage": "https://github.com/danielideriba/dekretoApp#readme",
   "devDependencies": {
     "body-parser": "^1.18.1",
-    "jsonwebtoken": "^8.0.1",
+    "jsonwebtoken": "^8.1.0",
     "nodemon": "^1.12.1",
     "path": "^0.12.7"
   },
@@ -27,7 +27,9 @@
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.1",
     "connect-flash": "^0.1.1",
+    "dateformat": "^3.0.2",
     "express": "^4.14.0",
+    "express-jwt": "^5.3.0",
     "express-messages": "^1.0.1",
     "express-session": "^1.15.5",
     "express-validator": "^3.2.1",
@@ -37,6 +39,7 @@
     "mongodb": "^2.2.30",
     "mongoose": "^4.11.5",
     "mongoose-currency": "^0.2.0",
+    "morgan": "^1.9.0",
     "multer": "^1.1.0",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",

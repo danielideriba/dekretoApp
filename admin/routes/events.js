@@ -5,6 +5,7 @@ const passport = require('passport');
 const adminPath = '/admin';
 const adminPathEvents = adminPath+'/events';
 const common = require('../utils/common');
+const dateFormat = require('dateformat');
 
 //models
 let Events = require('../models/events');
