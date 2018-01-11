@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const port = 3000;
 const adminPath = '/admin';
 const apiPath = '/api';
+const apiBeercast = '/beercastapi';
 const authPath = '/authenticate';
 const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
@@ -13,6 +14,7 @@ const passport = require('passport');
 const config = require(__dirname+'/admin/config/database');
 const common = require(__dirname+'/admin/utils/common');
 const bcrypt = require('bcryptjs');
+const Feed = require('rss-to-json');
 
 //init
 const app = express();
@@ -104,6 +106,12 @@ app.get(adminPath, common.ensureAuthenticated, function(req, res){
     description: "Sistema que alimenta a RESTApi",
     charset: 'utf-8',
     userId: "adminstrador"
+  });
+});
+
+app.get(apiBeercast, function(req, res){
+  Feed.load('http://beercast.com.br/feed/', function(err, rss){
+      res.send(rss)
   });
 });
 
