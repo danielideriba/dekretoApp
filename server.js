@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const port = 3000;
 const adminPath = '/admin';
 const apiPath = '/api';
+const sitePath = '/';
 const apiBeercast = '/beercastapi';
 const authPath = '/authenticate';
 const bodyParser = require('body-parser');
@@ -19,6 +20,7 @@ const Feed = require('rss-to-json');
 //init
 const app = express();
 const router = express.Router();
+const siteRouter = express.Router();
 
 const jwt = require('jsonwebtoken');
 app.set('superSecret', config.secret);
@@ -51,6 +53,7 @@ app.use(bodyParser.json());
 
 //set public folder
 app.use(express.static(path.join(__dirname, "public")));
+app.use('/', express.static(path.join(__dirname, "public")));
 
 // Express session middleware
 app.use(session({
@@ -116,9 +119,6 @@ app.get(apiBeercast, function(req, res){
 });
 
 //Access to api
-router.get('/', function(req, res){
-  res.json({ message: 'Bem vindo a API dekretoApp' });
-});
 app.use('/api', router);
 
 //Post to authenticate on our backend
@@ -176,8 +176,6 @@ router.use(function(req, res, next) {
     });
   }
 });
-
-
 
 //Routes admin
 let registerUsers = require(__dirname+adminPath+'/routes/users');
