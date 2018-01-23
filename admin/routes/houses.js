@@ -137,22 +137,6 @@ router.post('/edit/:id', function(req, res){
 
   let query = {_id:req.params.id}
 
-  //Image upload
-  // var form = new formidable.IncomingForm();
-  // form.multiples = true;
-  // form.uploadDir = path.join(__dirname, '/admin/uploads');
-  // form.on('file', function(field, file) {
-  //   fs.rename(file.path, path.join(form.uploadDir, file.name));
-  // });
-  // form.on('error', function(err) {
-  //   console.log('An error has occured: \n' + err);
-  // });
-  // form.on('end', function() {
-  //   res.end('success');
-  // });
-  // form.parse(req);
-  //Image upload
-
   Houses.update(query, houses, {upsert:true}, function(err){
     if(err){
       console.log(err);

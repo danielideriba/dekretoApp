@@ -2,7 +2,7 @@ extends layout
 
 block content
     h1 #{title}
-    form(method='POST' enctype='multipart/form-data' action='/admin/houses/edit/'+house._id)
+    form(method='POST' action='/admin/houses/edit/'+house._id)
       #form-group
       label #{label_house_name}:
       input.form-control(type='text', name='house_name', value=house.name)

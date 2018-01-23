@@ -105,6 +105,7 @@ router.get('/edit/:id', function(req, res){
     if(err){
       console.log(err);
     } else {
+      console.log(events);
       renderData(req, res);
     }
   });
@@ -127,7 +128,7 @@ router.get('/:id', function(req, res){
             } else {
               Houses.findById(events.id_houses, function(err, houses) {
                 if(err){
-                  console.log("lol");
+                  console.log(err);
                 } else {
                   res.render('single_events', {
                     currentPath: adminPathEvents,
