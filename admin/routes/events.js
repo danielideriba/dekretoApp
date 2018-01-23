@@ -91,7 +91,7 @@ router.get('/list', /*common.ensureAuthenticated,*/ function(req, res) {
       console.log(err);
     } else {
       res.render('list_events', {
-        title: "lista de Eventos",
+        title: "Lista de Eventos",
         empty_list: "Não existem eventos cadastrados",
         events: events
       });
@@ -127,7 +127,7 @@ router.get('/:id', function(req, res){
             } else {
               Houses.findById(events.id_houses, function(err, houses) {
                 if(err){
-                  console.log(err);
+                  console.log("lol");
                 } else {
                   res.render('single_events', {
                     currentPath: adminPathEvents,
