@@ -5,7 +5,7 @@ const port = 8080;
 const adminPath = '/admin';
 const apiPath = '/api';
 const sitePath = '/';
-const apiBeercast = '/beercastapi';
+const apiBeercast = '/beercastapi/programas/';
 const authPath = '/authenticate';
 const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
@@ -16,6 +16,7 @@ const config = require(__dirname+'/admin/config/database');
 const common = require(__dirname+'/admin/utils/common');
 const bcrypt = require('bcryptjs');
 const Feed = require('rss-to-json');
+const urlBeerCast = 'http://beercast.com.br/categoria/programas/feed';
 
 //init
 const app = express();
@@ -113,7 +114,7 @@ app.get(adminPath, common.ensureAuthenticated, function(req, res){
 });
 
 app.get(apiBeercast, function(req, res){
-  Feed.load('http://beercast.com.br/feed/', function(err, rss){
+  Feed.load(urlBeerCast, function(err, rss){
       res.send(rss)
   });
 });
