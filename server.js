@@ -16,7 +16,7 @@ const config = require(__dirname+'/admin/config/database');
 const common = require(__dirname+'/admin/utils/common');
 const bcrypt = require('bcryptjs');
 const Feed = require('rss-to-json');
-const urlBeerCast = 'http://beercast.com.br/categoria/programas/feed';
+const urlBeerCast = 'http://beercast.com.br/feed/';
 
 //init
 const app = express();
@@ -113,6 +113,7 @@ app.get(adminPath, common.ensureAuthenticated, function(req, res){
   });
 });
 
+///Retirar esse plugin por causa do cache
 app.get(apiBeercast, function(req, res){
   Feed.load(urlBeerCast, function(err, rss){
       res.send(rss)
