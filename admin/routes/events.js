@@ -1,3 +1,4 @@
+'use strict';
 const express = require('express');
 const flash = require('connect-flash');
 const router = express.Router();
