@@ -1,3 +1,4 @@
+"use strict";
 const LocalStrategy = require('passport-local').Strategy;
 const Users = require('../models/users');
 const config = require('../config/database');
