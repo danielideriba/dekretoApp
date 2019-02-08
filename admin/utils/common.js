@@ -1,3 +1,4 @@
+'use strict';
 module.exports = {
   //Access Control
   ensureAuthenticated: function (req, res, next){
