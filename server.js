@@ -2,7 +2,7 @@
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
-const port = 8080;
+const port = 3000;
 const adminPath = '/admin';
 const apiPath = '/api';
 const sitePath = '/';
@@ -201,6 +201,9 @@ app.use(apiPath+'/genres/', registerGenresApi);
 
 let registerTypesApi = require(__dirname+apiPath+'/routes/types');
 app.use(apiPath+'/types/', registerTypesApi);
+
+let registerTypesApi = require(__dirname+apiPath+'/routes/events');
+app.use(apiPath+'/events/', registerTypesApi);
 
 app.listen(port, function(){
     console.log('Server DekretoApi iniciado na porta--- ' + port);
