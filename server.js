@@ -202,8 +202,8 @@ app.use(apiPath+'/genres/', registerGenresApi);
 let registerTypesApi = require(__dirname+apiPath+'/routes/types');
 app.use(apiPath+'/types/', registerTypesApi);
 
-let registerTypesApi = require(__dirname+apiPath+'/routes/events');
-app.use(apiPath+'/events/', registerTypesApi);
+let registerEventsApi = require(__dirname+apiPath+'/routes/events');
+app.use(apiPath+'/events/', registerEventsApi);
 
 app.listen(port, function(){
     console.log('Server DekretoApi iniciado na porta--- ' + port);
