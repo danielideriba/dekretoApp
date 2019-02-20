@@ -177,6 +177,9 @@ app.use(adminPath+'/users/', registerUsers);
 let registerHouses = require(__dirname+adminPath+'/routes/houses');
 app.use(adminPath+'/houses/', registerHouses);
 
+let registerCarnaval = require(__dirname+adminPath+'/routes/carnaval');
+app.use(adminPath+'/carnaval/', registerCarnaval);
+
 let registerEvents = require(__dirname+adminPath+'/routes/events');
 app.use(adminPath+'/events/', registerEvents);
 

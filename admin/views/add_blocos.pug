@@ -1,0 +1,11 @@
+extends layout
+
+block content
+    h1 #{title}
+    form(method='POST' action='/admin/carnaval/add')
+      #form-group
+      label #{label_carnaval_name}:
+      input.form-control(type='text', name='bloco_name')
+      br
+      button.btn.btn-primary(type='submit',value='Submit') Enviar
+      

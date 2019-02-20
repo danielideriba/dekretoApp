@@ -3,8 +3,8 @@ const mongoose = require('mongoose');
 require('mongoose-currency').loadType(mongoose);
 const Currency = mongoose.Types.Currency;
 
-const EventsSchema = mongoose.Schema({
-  name: {
+const CarnavalSchema = mongoose.Schema({
+  nameParty: {
     type: String,
     trim: true,
     require: true,
@@ -21,27 +21,17 @@ const EventsSchema = mongoose.Schema({
     require: true,
     default: ''
   },
-  eventHour: {
+  initHour: {
     type: String,
     require: true,
     default: ''
   },
-  priceWithList: {
-    type: Currency,
+  endHour: {
+    type: String,
     require: true,
     default: ''
   },
-  priceWithoutList: {
-    type: Currency,
-    require: true,
-    default: ''
-  },
-  priceBefore: {
-    type: Currency,
-    require: true,
-    default: ''
-  },
-  priceSingle: {
+  priceType: {
     type: Currency,
     require: true,
     default: ''
@@ -51,23 +41,23 @@ const EventsSchema = mongoose.Schema({
     require: true,
     default: ''
   },
-  birthday: {
+  location: {
     type: String,
     require: true,
     default: ''
   },
-  typeConditions: {
+  coordinateslat: {
+    type: String,
+    require: true,
+    default: ''
+  },
+  coordinateslng: {
     type: String,
     require: true,
     default: ''
   },
   typeEvent: {
     type: Array,
-    require: true,
-    default: ''
-  },
-  id_houses: {
-    type: String,
     require: true,
     default: ''
   },
@@ -79,4 +69,4 @@ const EventsSchema = mongoose.Schema({
   datetime: { type : Date, default: Date.now }
 });
 
-let Events = module.exports = mongoose.model('Events', EventsSchema);
+let Carnaval = module.exports = mongoose.model('Carnaval', CarnavalSchema);

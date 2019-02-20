@@ -35,17 +35,19 @@ router.get('/add', /*common.ensureAuthenticated,*/ function(req, res) {
 });
 
 router.post('/add', /*common.ensureAuthenticated,*/ function(req, res) {
+console.log("novo item");
+
   //Validation
   req.checkBody('events_name','Nome do evento é obrigatório').notEmpty();
   req.checkBody('events_description','descrição é obrigatório').notEmpty();
   req.checkBody('events_date','Data é obrigatório').notEmpty();
   req.checkBody('events_hour','Hora é obrigatório').notEmpty();
-  req.checkBody('events_price_with_list','Valor com lista é obrigatório').notEmpty();
-  req.checkBody('events_price_without_list','Valor sem lista é obrigatório').notEmpty();
-  req.checkBody('events_price_before','Antecipado é obrigatório').notEmpty();
-  req.checkBody('events_price_birthday','Aniversariante é obrigatório').notEmpty();
-  req.checkBody('events_type_conditions','Condições é obrigatório').notEmpty();
-  req.checkBody('events_price_single','Valor único é obrigatório').notEmpty();
+  // req.checkBody('events_price_with_list','Valor com lista é obrigatório').notEmpty();
+  // req.checkBody('events_price_without_list','Valor sem lista é obrigatório').notEmpty();
+  // req.checkBody('events_price_before','Antecipado é obrigatório').notEmpty();
+  // req.checkBody('events_price_birthday','Aniversariante é obrigatório').notEmpty();
+  // req.checkBody('events_type_conditions','Condições é obrigatório').notEmpty();
+  // req.checkBody('events_price_single','Valor único é obrigatório').notEmpty();
   /*req.checkBody('events_style','Estilo é obrigatório').notEmpty();
   req.checkBody('events_houses','Casa é obrigatório').notEmpty();
   req.checkBody('events_type','Tipo é obrigatório').notEmpty();*/
@@ -78,26 +80,13 @@ router.post('/add', /*common.ensureAuthenticated,*/ function(req, res) {
           console.log(err);
           return;
         } else {
+          console.log("SALVANDO");
           req.flash('success', 'Evento Inserido');
           console.log('Evento Inserido');
           res.redirect(adminPathEvents+'/list');
         }
       });
   }
-});
-
-router.get('/list', /*common.ensureAuthenticated,*/ function(req, res) {
-  Events.find({}, function(err, events){
-    if(err){
-      console.log(err);
-    } else {
-      res.render('list_events', {
-        title: "Lista de Eventos",
-        empty_list: "Não existem eventos cadastrados",
-        events: events
-      });
-    }
-  });
 });
 
 //Edit Events
