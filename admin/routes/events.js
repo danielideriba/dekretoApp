@@ -61,7 +61,16 @@ console.log("novo item");
       let events = new Events();
       events.name = req.body.events_name;
       events.description = req.body.events_description;
-      events.eventDate = req.body.events_date;
+
+      //Formata data para inserir no banco
+      var eventDateStr = req.body.events_date
+      var arr = eventDateStr.split("/").map(function (val) {
+        return Number(val);
+      });
+      var dateEventFormated = arr[2]+"-"+arr[1]+"-"+arr[0];
+      events.eventDate = new Date(dateEventFormated);
+      //Formata data para inserir no banco
+
       events.eventHour = req.body.events_hour;
       events.priceWithList = req.body.events_price_with_list;
       events.priceWithoutList = req.body.events_price_without_list
@@ -95,8 +104,50 @@ router.get('/edit/:id', function(req, res){
     if(err){
       console.log(err);
     } else {
-      console.log(events);
-      renderData(req, res);
+      var queryGenre = {"_id": {$in: events.id_genre}};
+      Genre.find(queryGenre, function(err, genres) {
+        if(err){
+          console.log(err);
+        } else {
+          var queryType = {"_id": {$in: events.typeEvent}};
+          Types.find(queryType, function(err, types) {
+            if(err){
+              console.log(err);
+            } else {
+              Houses.findById(events.id_houses, function(err, houses) {
+                if(err){
+                  console.log(err);
+                } else {
+                  res.render('edit_events', {
+                    title: "Editar Eventos",
+                    label_events_name: "Nome do Evento",
+                    label_events_description: "Descrição do evento",
+                    label_events_date: "Data",
+                    label_events_hour: "Hora",
+                    label_events_priceWithList: "Valor COM lista",
+                    label_events_priceWithoutList: "Valor SEM lista",
+                    label_events_priceBefore: "Antecipado",
+                    label_events_priceSingle: "Preço único",
+                    label_events_birthday: "Aniversariante",
+                    label_events_typeConditions: "Condição do VIP (não aniversariante)",
+                    label_events_cover: "Imagem",
+                    label_events_style: "Estilo Musical", //Selectbox
+                    label_events_popularity: "Popularidade", // Rating
+                    label_events_belong_to: "Casas",
+                    label_events_type: "Tipo",
+                    id_house: id_houses,
+                    houses: houses,
+                    events: events,
+                    id_genre: events.id_genre,
+                    genres: genres,
+                    types: types
+                  });
+                }
+              });
+            }
+          });
+        }
+      });
     }
   });
 });

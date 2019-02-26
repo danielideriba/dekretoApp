@@ -4,9 +4,9 @@ block content
   h1 #{title}
   if blocos.length > 0
     ul.list-group
-      each blocos, i in blocos
+      each bloco, i in blocos
         li.list-group-item
-          a(href="/admin/carnaval/"+event._id)=blocos.nameParty
+          a(href="/admin/carnaval/"+bloco._id)=bloco.nameParty
   else
     span #{empty_list}
     

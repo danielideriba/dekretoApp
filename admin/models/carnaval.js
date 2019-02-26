@@ -31,6 +31,11 @@ const CarnavalSchema = mongoose.Schema({
     require: true,
     default: ''
   },
+  linkEvento: {
+    type: String,
+    require: true,
+    default: ''
+  },
   priceType: {
     type: Currency,
     require: true,
@@ -53,11 +58,6 @@ const CarnavalSchema = mongoose.Schema({
   },
   coordinateslng: {
     type: String,
-    require: true,
-    default: ''
-  },
-  typeEvent: {
-    type: Array,
     require: true,
     default: ''
   },

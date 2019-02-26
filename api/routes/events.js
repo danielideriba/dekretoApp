@@ -19,4 +19,29 @@ router.get('/list', function(req, res){
   });
 });
 
+router.get('/list/:startTime/:endTime', function(req, res) {
+  if(req.params.startTime && req.params.endTime){
+    // process.exit();
+    var startTime = req.params.startTime.trim();
+    var endTime = req.params.endTime.trim();
+
+    //Find
+    Events.find({
+        // unit_id: req.params.unit_id,
+        eventDate: {
+            $gt: startTime,
+            $lt: endTime
+        }
+    }, function(err, events) {
+        if (err) {
+          console.log(err);
+          return err
+        }
+        else {
+            res.json(events);
+        }
+    });
+  }
+});
+
 module.exports = router;

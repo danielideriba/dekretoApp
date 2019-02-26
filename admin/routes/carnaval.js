@@ -10,6 +10,7 @@ const dateFormat = require('dateformat');
 
 //models
 let Carnaval = require('../models/carnaval');
+let Genre = require('../models/genre');
 
 //List all users
 router.get('/list', /*common.ensureAuthenticated,*/ function(req, res){
@@ -33,19 +34,7 @@ router.get('/add', /*common.ensureAuthenticated,*/ function(req, res) {
 
 router.post('/add', /*common.ensureAuthenticated,*/ function(req, res) {
   //Validation
-  req.checkBody('events_name','Nome do evento é obrigatório').notEmpty();
-  // req.checkBody('events_description','descrição é obrigatório').notEmpty();
-  // req.checkBody('events_date','Data é obrigatório').notEmpty();
-  // req.checkBody('events_hour','Hora é obrigatório').notEmpty();
-  // req.checkBody('events_price_with_list','Valor com lista é obrigatório').notEmpty();
-  // req.checkBody('events_price_without_list','Valor sem lista é obrigatório').notEmpty();
-  // req.checkBody('events_price_before','Antecipado é obrigatório').notEmpty();
-  // req.checkBody('events_price_birthday','Aniversariante é obrigatório').notEmpty();
-  // req.checkBody('events_type_conditions','Condições é obrigatório').notEmpty();
-  // req.checkBody('events_price_single','Valor único é obrigatório').notEmpty();
-  /*req.checkBody('events_style','Estilo é obrigatório').notEmpty();
-  req.checkBody('events_houses','Casa é obrigatório').notEmpty();
-  req.checkBody('events_type','Tipo é obrigatório').notEmpty();*/
+  req.checkBody('bloco_name','Nome do evento é obrigatório').notEmpty();
 
   //Get errors
   let errors = req.validationErrors();
@@ -55,19 +44,17 @@ router.post('/add', /*common.ensureAuthenticated,*/ function(req, res) {
   } else {
       let carnaval = new Carnaval();
       carnaval.nameParty = req.body.bloco_name;
-      // events.description = req.body.events_description;
-      // events.eventDate = req.body.events_date;
-      // events.eventHour = req.body.events_hour;
-      // events.priceWithList = req.body.events_price_with_list;
-      // events.priceWithoutList = req.body.events_price_without_list
-      // events.priceBefore = req.body.price_before;
-      // events.priceSingle = req.body.price_single;
-      // events.cover = req.body.events_cover;
-      // events.birthday = req.body.birthday;
-      // events.typeConditions = req.body.events_type_conditions;
-      // events.typeEvent = req.body.events_type;
-      // events.id_houses = req.body.events_houses;
-      // events.id_genre = req.body.events_genre;
+      carnaval.description = req.body.bloco_description;
+      carnaval.eventDate = req.body.bloco_event_date;
+      carnaval.initHour = req.body.bloco_event_hour_init;
+      carnaval.endHour = req.body.bloco_event_hour_end;
+      carnaval.linkEvento = req.body.bloco_event_link;
+      carnaval.priceType = req.body.bloco_event_price;
+      carnaval.cover = req.body.bloco_event_cover;
+      carnaval.location = req.body.bloco_event_location;
+      carnaval.coordinateslat = req.body.bloco_event_lat;
+      carnaval.coordinateslng = req.body.bloco_event_lng;
+      carnaval.id_genre = req.body.bloco_genre;
 
       //Save data
       carnaval.save(function(err){
@@ -77,76 +64,101 @@ router.post('/add', /*common.ensureAuthenticated,*/ function(req, res) {
         } else {
           req.flash('success', 'Bloco de carnaval Inserido');
           console.log('Bloco de carnaval Inserido');
-          res.redirect(adminPathEvents+'/list');
+          res.redirect(adminPathCarnaval+'/list');
         }
       });
   }
 });
-//
-//
-// //Edit Events
-// router.get('/edit/:id', function(req, res){
-//   Events.findById(req.params.id, function(err, events){
-//     if(err){
-//       console.log(err);
-//     } else {
-//       console.log(events);
-//       renderData(req, res);
-//     }
-//   });
-// });
-//
-// router.get('/:id', function(req, res){
-//   Events.findById(req.params.id, function(err, events){
-//     if(err){
-//       console.log(err);
-//     } else {
-//       var queryGenre = {"_id": {$in: events.id_genre}};
-//       Genre.find(queryGenre, function(err, genres) {
-//         if(err){
-//           console.log(err);
-//         } else {
-//           var queryType = {"_id": {$in: events.typeEvent}};
-//           Types.find(queryType, function(err, types) {
-//             if(err){
-//               console.log(err);
-//             } else {
-//               Houses.findById(events.id_houses, function(err, houses) {
-//                 if(err){
-//                   console.log(err);
-//                 } else {
-//                   res.render('single_events', {
-//                     currentPath: adminPathEvents,
-//                     events: events,
-//                     genres: genres,
-//                     types: types,
-//                     houses_name: houses.name,
-//                     empty_list: "Não existem eventos cadastrados"
-//                   });
-//                 }
-//               });
-//             }
-//           });
-//         }
-//       });
-//     }
-//   });
-// });
-//
+
+// Update Submit Edit User
+router.post('/edit/:id', function(req, res){
+  let carnaval = {};
+  carnaval.nameParty = req.body.bloco_name;
+  description
+  eventDate
+  initHour
+  endHour
+  linkEvento
+  priceType
+  cover
+  location
+
+  carnaval.coordinateslat = req.body.house_coordinateslat;
+  carnaval.coordinateslng = req.body.house_coordinateslng;
+
+  let query = {_id:req.params.id}
+
+  Houses.update(query, houses, {upsert:true}, function(err){
+    if(err){
+      console.log(err);
+      return;
+    } else {
+      req.flash('success', 'Casa atualizada');
+      console.log('Casa atualizada');
+      res.redirect(adminPathHouses+'/list');
+    }
+  });
+});
+
+//Edit
+router.get('/edit/:id', function(req, res){
+  Carnaval.findById(req.params.id, function(err, blocos){
+    if(err){
+      console.log(err);
+    } else {
+      console.log(blocos);
+      renderData(req, res);
+    }
+  });
+});
+
+router.get('/:id', function(req, res){
+  Carnaval.findById(req.params.id, function(err, blocos){
+    if(err){
+      console.log(err);
+    } else {
+      var queryGenre = {"_id": {$in: blocos.id_genre}};
+      Genre.find(queryGenre, function(err, genres) {
+        if(err){
+          console.log(err);
+        } else {
+          res.render('single_carnaval', {
+              currentPath: adminPathCarnaval,
+              blocos: blocos,
+              genres: genres,
+              empty_list: "Não existem eventos cadastrados"
+          });
+        }
+      });
+    }
+  });
+});
+
 function renderData(req, res){
   var query = {"name": 1};
-  Carnaval.find({}, function(err, types){
+        Genre.find({}, function(err, genres){
             if(err){
               console.log(err);
             } else {
               res.render('add_blocos', {
                 title: "Cadastro de Blocos de carnaval",
                 label_carnaval_name: "Nome do Bloco",
-                list_blocos : ""
+                label_carnaval_description: "Descrição",
+                label_carnaval_event_date: "Data do Bloco",
+                label_carnaval_event_hour_init: "Hora inicio",
+                label_carnaval_event_hour_end: "Hora fim",
+                label_carnaval_event_link: "Link do evento",
+                label_carnaval_event_price: "Valor",
+                label_carnaval_event_cover: "Capa",
+                label_carnaval_event_location: "Local do bloco",
+                label_carnaval_event_lat: "Latitude",
+                label_carnaval_event_lng: "Longitude",
+                label_events_style: "Estilo do bloco",
+                genres: genres,
               });
             }
-          });
-}
+        });
+  }
 
 
 module.exports = router;
