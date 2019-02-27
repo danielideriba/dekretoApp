@@ -98,6 +98,11 @@ console.log("novo item");
   }
 });
 
+function getAllGenres(){
+  var query = Genre.find({}).lean();
+    return query;
+}
+
 //Edit Events
 router.get('/edit/:id', function(req, res){
   Events.findById(req.params.id, function(err, events){
@@ -135,7 +140,7 @@ router.get('/edit/:id', function(req, res){
                     label_events_popularity: "Popularidade", // Rating
                     label_events_belong_to: "Casas",
                     label_events_type: "Tipo",
-                    id_house: id_houses,
+                    id_house: events.id_houses,
                     houses: houses,
                     events: events,
                     id_genre: events.id_genre,
