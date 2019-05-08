@@ -205,6 +205,11 @@ app.use(apiPath+'/types/', registerTypesApi);
 let registerEventsApi = require(__dirname+apiPath+'/routes/events');
 app.use(apiPath+'/events/', registerEventsApi);
 
+//TODO: Retirar! Erro proposital
+let registerEventsApi = Require(__dirname+apiPath+'/routes/lol');
+App.use(apiPath+'/lol/', registerEventsApi);
+//TODO: Retirar! Erro proposital
+
 app.listen(port, function(){
     console.log('Server DekretoApi iniciado na porta--- ' + port);
 });
